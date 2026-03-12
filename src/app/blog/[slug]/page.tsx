@@ -13,7 +13,9 @@ import { GlowDivider } from "@/components/ui/glow-divider";
 import { useRouter } from "next/navigation";
 import BackButton from "@/components/ui/back-button";
 
-export default function BlogDetailPage({ params }: { params: { slug: string } }) {
+export default function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+    const resolvedParams = React.use(params);
+    const slug = resolvedParams.slug;
     const router = useRouter();
     const [blog, setBlog] = useState<BlogPost | null>(null);
     const [loading, setLoading] = useState(true);
@@ -21,12 +23,12 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
     useEffect(() => {
         const fetchBlog = async () => {
             setLoading(true);
-            const data = await blogApi.getBlogBySlug(params.slug);
+            const data = await blogApi.getBlogBySlug(slug);
             setBlog(data);
             setLoading(false);
         };
         fetchBlog();
-    }, [params.slug]);
+    }, [slug]);
 
     if (loading) {
         return (
@@ -117,15 +119,22 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
                 {/* --- CONTENT --- */}
                 <div className="max-w-3xl mx-auto px-6 relative z-10">
                     <div
-                        className="prose prose-invert prose-lg max-w-none 
+                        className="prose prose-invert prose-lg max-w-none rich-text-content
                         prose-headings:text-white prose-headings:font-bold
                         prose-p:text-neutral-300 prose-p:leading-loose
                         prose-a:text-[#00eef9] prose-a:no-underline hover:prose-a:underline
                         prose-strong:text-white
                         prose-li:text-neutral-300
                         prose-img:rounded-2xl prose-img:border prose-img:border-white/10"
-                        dangerouslySetInnerHTML={{ __html: sanitizeContent(blog.content || blog.excerpt) }}
-                    />
+                    >
+                        {blog.content && blog.content.includes('<') ? (
+                            <div dangerouslySetInnerHTML={{ __html: sanitizeContent(blog.content) }} />
+                        ) : (
+                            <div className="whitespace-pre-wrap leading-relaxed">
+                                {blog.content || blog.excerpt || 'No content available'}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </article>
 
