@@ -6,7 +6,7 @@ import Footer from "@/components/landing/footer";
 import { AmbientBackground } from "@/components/ui/ambient-background";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Search, X, SlidersHorizontal, ChevronDown, Calendar, User } from "lucide-react";
+import { ArrowUpRight, Search, X, SlidersHorizontal, ChevronDown, Calendar, User, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { GlowDivider } from "@/components/ui/glow-divider";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -24,6 +24,10 @@ export default function BlogPage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [activeCategory, setActiveCategory] = useState("All");
     const [isFiltersVisible, setIsFiltersVisible] = useState(false);
+
+    // --- PAGINATION STATE ---
+    const [currentPage, setCurrentPage] = useState(1);
+    const blogsPerPage = 6;
 
     // Fetch Data
     useEffect(() => {
@@ -62,6 +66,23 @@ export default function BlogPage() {
             return matchesSearch && matchesCategory;
         });
     }, [blogs, searchQuery, activeCategory]);
+
+    // Reset page when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchQuery, activeCategory]);
+
+    // Scroll to top when page changes
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage]);
+
+    // --- PAGINATED DATA ---
+    const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+    const paginatedBlogs = useMemo(() => {
+        const start = (currentPage - 1) * blogsPerPage;
+        return filteredBlogs.slice(start, start + blogsPerPage);
+    }, [filteredBlogs, currentPage]);
 
     // Helper for images
     const getImageSrc = (blog: BlogPost) => {
@@ -190,7 +211,7 @@ export default function BlogPage() {
                         className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                     >
                         <AnimatePresence mode="popLayout">
-                            {filteredBlogs.map((blog) => {
+                            {paginatedBlogs.map((blog) => {
                                 // Conditional Rendering: External Link vs Internal Link
                                 const CardContent = (
                                     <div className="group flex flex-col gap-6 h-full cursor-pointer">
@@ -258,6 +279,95 @@ export default function BlogPage() {
                             })}
                         </AnimatePresence>
                     </motion.div>
+                )}
+
+                {/* --- PAGINATION CONTROLS --- */}
+                {!loading && totalPages > 1 && (
+                    <div className="mt-20 flex flex-col items-center gap-6 relative z-10">
+                        <div className="flex items-center gap-2">
+                            {/* First Page */}
+                            <button
+                                onClick={() => setCurrentPage(1)}
+                                disabled={currentPage === 1}
+                                className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 text-neutral-400 hover:text-white hover:border-[#00eef9]/30 hover:bg-[#00eef9]/5 transition-all disabled:opacity-30 disabled:cursor-not-allowed group"
+                                title="First Page"
+                            >
+                                <ChevronsLeft className="w-4 h-4" />
+                            </button>
+
+                            {/* Previous Page */}
+                            <button
+                                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                disabled={currentPage === 1}
+                                className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 text-neutral-400 hover:text-white hover:border-[#00eef9]/30 hover:bg-[#00eef9]/5 transition-all disabled:opacity-30 disabled:cursor-not-allowed group"
+                                title="Previous Page"
+                            >
+                                <ChevronLeft className="w-4 h-4" />
+                            </button>
+
+                            {/* Page Numbers */}
+                            <div className="flex items-center gap-2 px-2">
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
+                                    // Show first, last, current, and pages around current
+                                    if (
+                                        pageNum === 1 ||
+                                        pageNum === totalPages ||
+                                        (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
+                                    ) {
+                                        return (
+                                            <button
+                                                key={pageNum}
+                                                onClick={() => setCurrentPage(pageNum)}
+                                                className={cn(
+                                                    "w-10 h-10 rounded-xl font-bold transition-all duration-300 border flex items-center justify-center text-sm",
+                                                    currentPage === pageNum
+                                                        ? "bg-[#00eef9] text-black border-[#00eef9] shadow-[0_0_20px_rgba(0,238,249,0.3)] scale-110"
+                                                        : "bg-white/5 text-neutral-400 border-white/10 hover:border-white/20 hover:text-white hover:bg-white/10"
+                                                )}
+                                            >
+                                                {pageNum}
+                                            </button>
+                                        );
+                                    }
+
+                                    // Ellipsis
+                                    if (
+                                        (pageNum === 2 && currentPage > 3) ||
+                                        (pageNum === totalPages - 1 && currentPage < totalPages - 2)
+                                    ) {
+                                        return (
+                                            <span key={pageNum} className="w-6 text-center text-neutral-600">
+                                                ...
+                                            </span>
+                                        );
+                                    }
+
+                                    return null;
+                                })}
+                            </div>
+
+                            {/* Next Page */}
+                            <button
+                                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                disabled={currentPage === totalPages}
+                                className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 text-neutral-400 hover:text-white hover:border-[#00eef9]/30 hover:bg-[#00eef9]/5 transition-all disabled:opacity-30 disabled:cursor-not-allowed group"
+                                title="Next Page"
+                            >
+                                <ChevronRight className="w-4 h-4" />
+                            </button>
+
+                            {/* Last Page */}
+                            <button
+                                onClick={() => setCurrentPage(totalPages)}
+                                disabled={currentPage === totalPages}
+                                className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 text-neutral-400 hover:text-white hover:border-[#00eef9]/30 hover:bg-[#00eef9]/5 transition-all disabled:opacity-30 disabled:cursor-not-allowed group"
+                                title="Last Page"
+                            >
+                                <ChevronsRight className="w-4 h-4" />
+                            </button>
+                        </div>
+                        
+                    </div>
                 )}
 
                 {/* --- EMPTY STATE --- */}
