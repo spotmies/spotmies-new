@@ -97,7 +97,7 @@ export default function CareersPage() {
     const totalPages = Math.ceil(totalJobs / JOBS_PER_PAGE);
 
     const handleApply = (jobId: string) => {
-        window.open(`https://www.reaidy.io/job/${jobId}`, "_blank");
+        window.open(`https://www.reaidy.io/jobs/${jobId}`, "_blank");
     };
 
     const stripHtml = (html: string) => {
