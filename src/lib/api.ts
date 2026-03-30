@@ -1,7 +1,7 @@
 import { Project, Job } from "@/types/types";
 import { PROJECT_DATA } from "@/data/projects"; // Import the local data
 
-const CAREERS_API_URL = "https://api.reaidy.io/public/job-post/search-jobs";
+const CAREERS_API_URL = "https://api.reaidy.io/api/v1/public/jobs";
 
 // CHANGED: Now simply returns local data immediately
 export async function getProjects(): Promise<Project[]> {
