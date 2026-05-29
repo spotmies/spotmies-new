@@ -37,6 +37,12 @@ const XIcon = ({ className }: { className?: string }) => (
 
 
 export const ContactSection = () => {
+    const callUsNumber = process.env.NEXT_PUBLIC_CALL_US_NUMBER || "+91 7416498484";
+    const callUsLink = `tel:${callUsNumber.replace(/\s+/g, '')}`;
+    
+    const hiringNumber = process.env.NEXT_PUBLIC_HIRING_NUMBER || "+91 7207333883";
+    const hiringLink = `tel:${hiringNumber.replace(/\s+/g, '')}`;
+
     const [formState, setFormState] = useState({
         name: "",
         email: "",
@@ -132,8 +138,8 @@ export const ContactSection = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full items-start mt-8">
                         <div className="space-y-6">
                             <ContactItem icon={<Mail className="w-5 h-5" />} label="Email us" value="info@spotmies.com" href="mailto:info@spotmies.com" />
-                            <ContactItem icon={<Phone className="w-5 h-5" />} label="Call us" value="+91 8019933883" href="tel:+918019933883" />
-                            <ContactItem icon={<Phone className="w-5 h-5" />} label="Hiring" value="+91 7207333883" href="tel:+917207333883" />
+                            <ContactItem icon={<Phone className="w-5 h-5" />} label="Call us" value={callUsNumber} href={callUsLink} />
+                            <ContactItem icon={<Phone className="w-5 h-5" />} label="Hiring" value={hiringNumber} href={hiringLink} />
                         </div>
                         <div className="flex flex-col h-full pt-1">
                             <LocationMap location="Visakhapatnam, India" coordinates="17.7292° N, 83.3213° E" className="w-full" />
