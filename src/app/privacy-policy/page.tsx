@@ -114,7 +114,7 @@ export default function PrivacyPolicy() {
                         </p>
                         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-2">
                             <a href="mailto:info@spotmies.com" className="text-[#00d3f3] hover:underline">info@spotmies.com</a>
-                            <a href="tel:+918341980196" className="text-neutral-300 hover:text-white transition-colors">+91 8341980196</a>
+                            <a href={`tel:${(process.env.NEXT_PUBLIC_PRIVACY_NUMBER || "+91 7416498484").replace(/\s+/g, '')}`} className="text-neutral-300 hover:text-white transition-colors">{process.env.NEXT_PUBLIC_PRIVACY_NUMBER || "+91 8341980196"}</a>
                             <a href="https://www.spotmies.com" target="_blank" rel="noopener noreferrer" className="text-neutral-300 hover:text-white transition-colors">www.spotmies.com</a>
                         </div>
                         <p className="text-neutral-500 text-sm mt-6 italic">
