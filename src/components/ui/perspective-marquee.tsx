@@ -19,6 +19,7 @@ export interface PerspectiveMarqueeProps {
 
 const DEFAULT_ITEMS: MarqueeItem[] = [
   { name: "Zin in Thuiswerken", src: "https://spotmiesstorage.blob.core.windows.net/media/comp1.png" },
+  { name: "Reaidy", src: "https://www.reaidy.io/assets/logo_dark-DMRlJ8_-.png" },
   { name: "A Square GoKarting", src: "https://spotmiesstorage.blob.core.windows.net/media/comp2.png" },
   { name: "SMARTFALCON", src: "https://spotmiesstorage.blob.core.windows.net/media/comp3.png" },
   { name: "Credit Report", src: "https://spotmiesstorage.blob.core.windows.net/media/comp4.png" },
@@ -42,7 +43,6 @@ const DEFAULT_ITEMS: MarqueeItem[] = [
   { name: "Orfus", src: "https://spotmiesstorage.blob.core.windows.net/media/comp22.png" },
   { name: "Vitals", src: "https://spotmiesstorage.blob.core.windows.net/media/comp23.png" },
   { name: "VarunMotors", src: "https://spotmiesstorage.blob.core.windows.net/media/comp24.png" },
-  { name: "Reaidy", src: "https://www.reaidy.io/assets/logo_dark-DMRlJ8_-.png" },
   { name: "Awaken", src: "https://spotmiesstorage.blob.core.windows.net/media/awaken0.png" },
   { name: "Amero X", src: "https://spotmiesstorage.blob.core.windows.net/media/amero0.png" },
   { name: "BoomBoomTalk", src: "https://spotmiesstorage.blob.core.windows.net/media/boomboomtalk0.png" },
@@ -61,11 +61,11 @@ const DEFAULT_ITEMS: MarqueeItem[] = [
 export function PerspectiveMarqueePlayer(props: PerspectiveMarqueeProps & { isDark?: boolean }) {
   const isDark = props.isDark ?? true;
   const items = props.items ?? DEFAULT_ITEMS;
-  const itemWidth = props.itemWidth ?? 350;
-  
+  const itemWidth = props.itemWidth ?? 140;
+
   const fadeColor = props.fadeColor ?? (isDark ? "rgba(0,0,0,1)" : "rgba(255,255,255,1)");
   const background = props.background ?? "transparent";
-  
+
   // Calculate duration based on the number of items for a smooth standard speed.
   // We duplicate the items once, so 38 items * 2 = 76 items.
   const durationInSeconds = items.length * 3; // Approx 3 seconds per item width traversal
@@ -84,7 +84,7 @@ export function PerspectiveMarqueePlayer(props: PerspectiveMarqueeProps & { isDa
           animation: perspective-marquee-scroll ${durationInSeconds}s linear infinite;
         }
       `}</style>
-      
+
       <div
         className={props.className}
         style={{
@@ -116,8 +116,8 @@ export function PerspectiveMarqueePlayer(props: PerspectiveMarqueeProps & { isDa
                   justifyContent: "center",
                   width: itemWidth,
                   height: "100%",
-                  paddingRight: 40,
-                  transform: "translateY(-16px)", // Visually shift logos up
+                  paddingRight: 16,
+                  transform: "translateY(-7px)",
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -125,11 +125,11 @@ export function PerspectiveMarqueePlayer(props: PerspectiveMarqueeProps & { isDa
                   src={item.src}
                   alt={item.name}
                   style={{
-                    maxHeight: "120px",
+                    maxHeight: "36px",
                     width: "auto",
                     objectFit: "contain",
                     filter: "brightness(0) invert(1)",
-                    opacity: 0.8
+                    opacity: 0.9
                   }}
                 />
               </div>
@@ -137,18 +137,7 @@ export function PerspectiveMarqueePlayer(props: PerspectiveMarqueeProps & { isDa
           </div>
         </div>
 
-        {/* Depth-of-Field Blur Overlay using mask-image */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            pointerEvents: "none",
-            backdropFilter: "blur(4px)",
-            WebkitBackdropFilter: "blur(4px)",
-            maskImage: "linear-gradient(90deg, black 0%, transparent 20%, transparent 80%, black 100%)",
-            WebkitMaskImage: "linear-gradient(90deg, black 0%, transparent 20%, transparent 80%, black 100%)",
-          }}
-        />
+
 
         {/* Fade Overlay */}
         <div

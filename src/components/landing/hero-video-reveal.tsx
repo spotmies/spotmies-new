@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import { motion, useMotionValue, useScroll, useTransform, useSpring, useInView, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import { PerspectiveMarqueePlayer } from "@/components/ui/perspective-marquee";
 
@@ -56,7 +56,7 @@ function buildNotchPath(width: number, height: number, radius: number, notchWidt
 
 export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
+    const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"],
@@ -71,7 +71,13 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
 
     const isContainerInView = useInView(containerRef);
 
-    const videos = ["/video1.mp4", "/video2.mp4", "/video3.mp4", "/video4.mp4", "/video5.mp4"];
+    const videos = [
+        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3iVkvCKwGbtro0xYShRpEzMyFOLuf7c8eCGVqT",
+        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3iKoFnG85WTx7bFMEnAO58qUL6iuIVRmQzkN9Y",
+        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3iBttBB0ExxH8PRt7TM2LOspFIy0U5EJv3AeYk",
+        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3it9fvGSlUx52NqWcVG736rAjlbaDeOMXsL8dw",
+        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3ieTqBXafMf3Tj5ICFamSKdR2HWEQsw4uLhBOz"
+    ];
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [isMuted, setIsMuted] = useState(true);
     const [isHovering, setIsHovering] = useState(false);
@@ -107,9 +113,15 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
     };
 
     useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.play().catch((e) => console.error("Video playback failed:", e));
-        }
+        videoRefs.current.forEach((video, index) => {
+            if (!video) return;
+            if (index === currentVideoIndex) {
+                video.currentTime = 0;
+                video.play().catch((e) => console.error("Video playback failed:", e));
+            } else {
+                video.pause();
+            }
+        });
     }, [currentVideoIndex]);
 
     // Initialize with fixed SSR fallback values to prevent hydration mismatches.
@@ -179,15 +191,27 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                         onMouseLeave={handleMouseLeave}
                         onClick={toggleMute}
                     >
-                        <video
-                            ref={videoRef}
-                            src={videos[currentVideoIndex]}
-                            autoPlay
-                            muted={isMuted}
-                            playsInline
-                            onEnded={handleVideoEnded}
-                            className="w-full h-full object-cover"
-                        />
+                        {videos.map((src, index) => (
+                            <motion.video
+                                key={src}
+                                ref={(el) => {
+                                    videoRefs.current[index] = el;
+                                }}
+                                src={src}
+                                muted={isMuted}
+                                playsInline
+                                preload={index === 0 || index === 1 ? "auto" : "metadata"}
+                                onEnded={index === currentVideoIndex ? handleVideoEnded : undefined}
+                                className="w-full h-full object-cover absolute inset-0"
+                                initial={false}
+                                animate={{
+                                    opacity: index === currentVideoIndex ? 1 : 0,
+                                    scale: index === currentVideoIndex ? 1 : 1.05,
+                                    filter: index === currentVideoIndex ? "blur(0px)" : "blur(10px)"
+                                }}
+                                transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+                            />
+                        ))}
 
                         {/* Subtle white overlay for cinematic blending (from inverted-text.html) */}
                         <div className="absolute inset-0 bg-white mix-blend-overlay opacity-15 pointer-events-none z-0" />
