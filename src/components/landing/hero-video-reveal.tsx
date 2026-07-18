@@ -56,7 +56,7 @@ function buildNotchPath(width: number, height: number, radius: number, notchWidt
 
 export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
+    const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"],
@@ -113,9 +113,15 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
     };
 
     useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.play().catch((e) => console.error("Video playback failed:", e));
-        }
+        videoRefs.current.forEach((video, index) => {
+            if (!video) return;
+            if (index === currentVideoIndex) {
+                video.currentTime = 0;
+                video.play().catch((e) => console.error("Video playback failed:", e));
+            } else {
+                video.pause();
+            }
+        });
     }, [currentVideoIndex]);
 
     // Initialize with fixed SSR fallback values to prevent hydration mismatches.
@@ -185,21 +191,27 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                         onMouseLeave={handleMouseLeave}
                         onClick={toggleMute}
                     >
-                        <AnimatePresence>
+                        {videos.map((src, index) => (
                             <motion.video
-                                key={currentVideoIndex}
-                                src={videos[currentVideoIndex]}
-                                autoPlay
+                                key={src}
+                                ref={(el) => {
+                                    videoRefs.current[index] = el;
+                                }}
+                                src={src}
                                 muted={isMuted}
                                 playsInline
-                                onEnded={handleVideoEnded}
+                                preload={index === 0 || index === 1 ? "auto" : "metadata"}
+                                onEnded={index === currentVideoIndex ? handleVideoEnded : undefined}
                                 className="w-full h-full object-cover absolute inset-0"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 1.5, ease: "easeInOut" }}
+                                initial={false}
+                                animate={{
+                                    opacity: index === currentVideoIndex ? 1 : 0,
+                                    scale: index === currentVideoIndex ? 1 : 1.05,
+                                    filter: index === currentVideoIndex ? "blur(0px)" : "blur(10px)"
+                                }}
+                                transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
                             />
-                        </AnimatePresence>
+                        ))}
 
                         {/* Subtle white overlay for cinematic blending (from inverted-text.html) */}
                         <div className="absolute inset-0 bg-white mix-blend-overlay opacity-15 pointer-events-none z-0" />
