@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import { motion, useMotionValue, useScroll, useTransform, useSpring, useInView, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import { PerspectiveMarqueePlayer } from "@/components/ui/perspective-marquee";
 
@@ -71,7 +71,13 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
 
     const isContainerInView = useInView(containerRef);
 
-    const videos = ["/video1.mp4", "/video2.mp4", "/video3.mp4", "/video4.mp4", "/video5.mp4"];
+    const videos = [
+        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3iVkvCKwGbtro0xYShRpEzMyFOLuf7c8eCGVqT",
+        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3iKoFnG85WTx7bFMEnAO58qUL6iuIVRmQzkN9Y",
+        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3iBttBB0ExxH8PRt7TM2LOspFIy0U5EJv3AeYk",
+        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3it9fvGSlUx52NqWcVG736rAjlbaDeOMXsL8dw",
+        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3ieTqBXafMf3Tj5ICFamSKdR2HWEQsw4uLhBOz"
+    ];
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [isMuted, setIsMuted] = useState(true);
     const [isHovering, setIsHovering] = useState(false);
@@ -179,15 +185,21 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                         onMouseLeave={handleMouseLeave}
                         onClick={toggleMute}
                     >
-                        <video
-                            ref={videoRef}
-                            src={videos[currentVideoIndex]}
-                            autoPlay
-                            muted={isMuted}
-                            playsInline
-                            onEnded={handleVideoEnded}
-                            className="w-full h-full object-cover"
-                        />
+                        <AnimatePresence>
+                            <motion.video
+                                key={currentVideoIndex}
+                                src={videos[currentVideoIndex]}
+                                autoPlay
+                                muted={isMuted}
+                                playsInline
+                                onEnded={handleVideoEnded}
+                                className="w-full h-full object-cover absolute inset-0"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 1.5, ease: "easeInOut" }}
+                            />
+                        </AnimatePresence>
 
                         {/* Subtle white overlay for cinematic blending (from inverted-text.html) */}
                         <div className="absolute inset-0 bg-white mix-blend-overlay opacity-15 pointer-events-none z-0" />
