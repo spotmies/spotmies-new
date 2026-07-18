@@ -12,6 +12,7 @@
     "@radix-ui/react-slot": "^1.2.4",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
+    "@remotion/player": "^4.0.490",
     "@tailwindcss/vite": "^4.0.0",
     "@types/three": "^0.182.0",
     "class-variance-authority": "^0.7.1",
@@ -27,6 +28,7 @@
     "react-dom": "19.2.3",
     "react-fast-marquee": "^1.6.5",
     "react-use-measure": "^2.1.7",
+    "remotion": "^4.0.490",
     "tailwind-merge": "^3.4.0",
     "three": "^0.182.0"
   },

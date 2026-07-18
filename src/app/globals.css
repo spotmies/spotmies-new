@@ -9,9 +9,11 @@
     0% {
       opacity: 0.4;
     }
+
     50% {
       opacity: 0.8;
     }
+
     100% {
       opacity: 0.4;
     }
@@ -24,6 +26,7 @@
     from {
       background-position: 0 0;
     }
+
     to {
       background-position: -200% 0;
     }
@@ -31,11 +34,12 @@
 
   /* Marquee/Scroll Animation */
   --animate-scroll-left: scroll-left var(--duration, 40s) linear infinite;
-  
+
   @keyframes scroll-left {
     from {
       transform: translateX(0);
     }
+
     to {
       transform: translateX(-50%);
     }
@@ -45,9 +49,12 @@
   --animate-blob-bounce: blob-bounce 10s infinite ease-in-out;
 
   @keyframes blob-bounce {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translate(0, 0);
     }
+
     50% {
       transform: translate(20px, -20px);
     }
@@ -56,34 +63,52 @@
 
 /* --- 2. BASE STYLES --- */
 @layer base {
+
+  html,
+  body {
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
   html {
     /* Enables smooth scrolling for anchor links (e.g., #services) */
     scroll-behavior: smooth;
   }
-  
+
   body {
-    background-color: #050505; /* Matches your dark theme default */
+    background-color: #050505;
+    /* Matches your dark theme default */
     color: #ffffff;
   }
 }
 
 /* --- 3. UTILITIES --- */
 @layer utilities {
+
   /* Hide Scrollbar but keep functionality */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  
+
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 }
 
 /* --- 4. RICH TEXT CONTENT (Matches Admin Panel) --- */
 .rich-text-content {
   line-height: 1.8;
-  color: #d4d4d8; /* text-zinc-300 */
+  color: #d4d4d8;
+  /* text-zinc-300 */
 }
 
 .rich-text-content h1 {
@@ -193,6 +218,14 @@
 }
 
 /* ProseMirror specific tags (sometimes present in Tiptap output) */
-.rich-text-content .text-align-center { text-align: center; }
-.rich-text-content .text-align-right { text-align: right; }
-.rich-text-content .text-align-justify { text-align: justify; }
+.rich-text-content .text-align-center {
+  text-align: center;
+}
+
+.rich-text-content .text-align-right {
+  text-align: right;
+}
+
+.rich-text-content .text-align-justify {
+  text-align: justify;
+}

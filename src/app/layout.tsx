@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Outfit, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
+import { BottomBlur } from "@/components/ui/bottom-blur";
 import "./globals.css";
 
 const inter = Inter({
@@ -12,6 +13,11 @@ const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -27,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${outfit.variable} antialiased no-scrollbar font-sans`}
+        className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} antialiased no-scrollbar font-sans`}
       >
         {/* Facebook Pixel Script */}
         <Script id="facebook-pixel" strategy="afterInteractive">
@@ -71,6 +77,7 @@ export default function RootLayout({
         </Script>
 
         {children}
+        <BottomBlur />
       </body>
     </html>
   );
