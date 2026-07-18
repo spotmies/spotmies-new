@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .marquee-container {
+    width: 600px;
+    height: 100px;
+    background: #111;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .marquee-track {
+    display: flex;
+    animation: scroll 10s linear infinite;
+  }
+  .marquee-item {
+    font-size: 30px;
+    color: white;
+    padding: 0 20px;
+    white-space: nowrap;
+  }
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .blur-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    mask-image: linear-gradient(to right, black 0%, transparent 20%, transparent 80%, black 100%);
+    -webkit-mask-image: linear-gradient(to right, black 0%, transparent 20%, transparent 80%, black 100%);
+  }
+  .fade-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to right, #111 0%, transparent 20%, transparent 80%, #111 100%);
+  }
+</style>
+</head>
+<body>
+  <div class="marquee-container">
+    <div class="marquee-track">
+      <div class="marquee-item">ITEM 1</div>
+      <div class="marquee-item">ITEM 2</div>
+      <div class="marquee-item">ITEM 3</div>
+      <div class="marquee-item">ITEM 4</div>
+      <div class="marquee-item">ITEM 5</div>
+      <div class="marquee-item">ITEM 1</div>
+      <div class="marquee-item">ITEM 2</div>
+      <div class="marquee-item">ITEM 3</div>
+      <div class="marquee-item">ITEM 4</div>
+      <div class="marquee-item">ITEM 5</div>
+    </div>
+    <div class="blur-overlay"></div>
+    <div class="fade-overlay"></div>
+  </div>
+</body>
+</html>
