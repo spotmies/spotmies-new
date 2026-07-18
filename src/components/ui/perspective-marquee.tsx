@@ -1,8 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { useCurrentFrame } from "remotion";
-import { Player } from "@remotion/player";
 
 export interface MarqueeItem {
   name: string;
@@ -60,60 +58,56 @@ const DEFAULT_ITEMS: MarqueeItem[] = [
   { name: "WingDent", src: "https://spotmiesstorage.blob.core.windows.net/media/wingdent0.png" }
 ];
 
-export function PerspectiveMarquee({
-  items = DEFAULT_ITEMS,
-  itemWidth = 180, // Approximate width per item including padding
-  pixelsPerFrame = 2,
-  fadeColor = "rgba(0,0,0,1)",
-  background = "transparent",
-  speed = 1,
-  className,
-}: PerspectiveMarqueeProps) {
-  const frame = useCurrentFrame() * speed;
-
-  const approxItemWidth = items.length * itemWidth;
-
-  const offset = -((frame * pixelsPerFrame) % approxItemWidth);
-  const rendered = [...items, ...items, ...items];
+export function PerspectiveMarqueePlayer(props: PerspectiveMarqueeProps & { isDark?: boolean }) {
+  const isDark = props.isDark ?? true;
+  const items = props.items ?? DEFAULT_ITEMS;
+  const itemWidth = props.itemWidth ?? 350;
+  
+  const fadeColor = props.fadeColor ?? (isDark ? "rgba(0,0,0,1)" : "rgba(255,255,255,1)");
+  const background = props.background ?? "transparent";
+  
+  // Calculate duration based on the number of items for a smooth standard speed.
+  // We duplicate the items once, so 38 items * 2 = 76 items.
+  const durationInSeconds = items.length * 3; // Approx 3 seconds per item width traversal
 
   return (
-    <div
-      className={className}
-      style={{
-        position: "absolute",
-        inset: 0,
-        background,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        overflow: "hidden",
-      }}
-    >
+    <div className="w-full h-full overflow-hidden flex items-center justify-center relative">
+      <style suppressHydrationWarning>{`
+        @keyframes perspective-marquee-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .perspective-marquee-track {
+          display: flex;
+          align-items: center;
+          white-space: nowrap;
+          animation: perspective-marquee-scroll ${durationInSeconds}s linear infinite;
+        }
+      `}</style>
+      
       <div
+        className={props.className}
         style={{
-          width: "100%",
+          position: "absolute",
+          inset: 0,
+          background,
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-start",
+          justifyContent: "center",
+          overflow: "hidden",
         }}
       >
         <div
           style={{
+            width: "100%",
             display: "flex",
             alignItems: "center",
-            whiteSpace: "nowrap",
-            transform: `translateX(${offset}px)`,
+            justifyContent: "flex-start",
           }}
         >
-          {rendered.map((item, i) => {
-            // Apply depth-of-field blur based on horizontal position from center
-            const itemCenter = i * itemWidth + itemWidth / 2 + offset;
-            const norm = (itemCenter - 640) / 640;
-            const distance = Math.min(1, Math.abs(norm));
-            const blurPx = distance * 4; // Slight blur at the edges
-            const opacity = Math.max(0.2, 1 - distance * 0.5);
-
-            return (
+          <div className="perspective-marquee-track">
+            {/* Render items twice for infinite loop */}
+            {[...items, ...items].map((item, i) => (
               <div
                 key={i}
                 style={{
@@ -123,8 +117,6 @@ export function PerspectiveMarquee({
                   width: itemWidth,
                   height: "100%",
                   paddingRight: 40,
-                  filter: `blur(${blurPx}px)`,
-                  opacity,
                   transform: "translateY(-16px)", // Visually shift logos up
                 }}
               >
@@ -133,7 +125,7 @@ export function PerspectiveMarquee({
                   src={item.src}
                   alt={item.name}
                   style={{
-                    maxHeight: "120px", // Pushed to the absolute max height of the 80px notch
+                    maxHeight: "120px",
                     width: "auto",
                     objectFit: "contain",
                     filter: "brightness(0) invert(1)",
@@ -141,56 +133,33 @@ export function PerspectiveMarquee({
                   }}
                 />
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
+
+        {/* Depth-of-Field Blur Overlay using mask-image */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+            maskImage: "linear-gradient(90deg, black 0%, transparent 20%, transparent 80%, black 100%)",
+            WebkitMaskImage: "linear-gradient(90deg, black 0%, transparent 20%, transparent 80%, black 100%)",
+          }}
+        />
+
+        {/* Fade Overlay */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            background: `linear-gradient(90deg, ${fadeColor} 0%, transparent 15%, transparent 85%, ${fadeColor} 100%)`,
+          }}
+        />
       </div>
-
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          background: `linear-gradient(90deg, ${fadeColor} 0%, transparent 15%, transparent 85%, ${fadeColor} 100%)`,
-        }}
-      />
-    </div>
-  );
-}
-
-export function PerspectiveMarqueePlayer(props: PerspectiveMarqueeProps & { isDark?: boolean }) {
-  const isDark = props.isDark ?? true;
-
-  const items = props.items ?? DEFAULT_ITEMS;
-  const itemWidth = props.itemWidth ?? 350;
-  const targetPixelsPerFrame = props.pixelsPerFrame ?? 1.5;
-
-  const approxItemWidth = items.length * itemWidth;
-  const durationInFrames = Math.max(1, Math.round(approxItemWidth / targetPixelsPerFrame));
-  const actualPixelsPerFrame = approxItemWidth / durationInFrames;
-
-  return (
-    <div className="w-full h-full overflow-hidden flex items-center justify-center relative">
-      <Player
-        component={PerspectiveMarquee}
-        inputProps={{
-          items: items,
-          pixelsPerFrame: actualPixelsPerFrame,
-          background: props.background ?? "transparent",
-          fadeColor: props.fadeColor ?? (isDark ? "rgba(0,0,0,1)" : "rgba(255,255,255,1)"),
-          itemWidth: itemWidth,
-        }}
-        durationInFrames={durationInFrames}
-        fps={30}
-        compositionWidth={1280}
-        compositionHeight={160}
-        style={{ width: "100%", height: "100%", background: "transparent" }}
-        controls={false}
-        autoPlay
-        loop
-        clickToPlay={false}
-        acknowledgeRemotionLicense={true}
-      />
     </div>
   );
 }
