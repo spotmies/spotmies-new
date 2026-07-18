@@ -12,6 +12,7 @@
     "@radix-ui/react-slot": "^1.2.4",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
+    "@remotion/player": "^4.0.490",
     "@tailwindcss/vite": "^4.0.0",
     "@types/three": "^0.182.0",
     "class-variance-authority": "^0.7.1",
@@ -19,6 +20,7 @@
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.29.2",
     "googleapis": "^171.1.0",
+    "gsap": "^3.15.0",
     "lucide-react": "^0.562.0",
     "mini-svg-data-uri": "^1.4.4",
     "motion": "^12.29.2",
@@ -27,6 +29,7 @@
     "react-dom": "19.2.3",
     "react-fast-marquee": "^1.6.5",
     "react-use-measure": "^2.1.7",
+    "remotion": "^4.0.490",
     "tailwind-merge": "^3.4.0",
     "three": "^0.182.0"
   },

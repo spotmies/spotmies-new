@@ -38,15 +38,15 @@ export const LogoCloud = ({ logos, className }: LogoCloudProps) => {
             {/* Left Fade */}
             <ProgressiveBlur
                 className="pointer-events-none absolute left-0 top-0 h-full w-24"
-                direction="left"
-                blurIntensity={0.5}
+                position="top"
+                blurAmount="4px"
             />
 
             {/* Right Fade */}
             <ProgressiveBlur
                 className="pointer-events-none absolute right-0 top-0 h-full w-24"
-                direction="right"
-                blurIntensity={0.5}
+                position="top"
+                blurAmount="4px"
             />
         </div>
     );

@@ -23,7 +23,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="w-full bg-[#050505] text-gray-400 pt-16 pb-8 border-t border-white/5 font-sans">
+        <footer className="w-full bg-[#050505] text-gray-400 pt-16 pb-8 font-sans">
             <div className="max-w-[1320px] mx-auto px-6 md:px-10">
 
                 {/* --- MAIN CONTENT GRID --- */}

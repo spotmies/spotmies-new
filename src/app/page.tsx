@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from "@/components/landing/navbar";
 import { HeroSection } from "@/components/landing/hero-section";
+import { HeroVideoReveal } from "@/components/landing/hero-video-reveal";
 import { TechStack } from "@/components/landing/tech-stack";
 import CompaniesSection from "@/components/landing/companies-section";
 import BrandMastery from "@/components/landing/brand-mastery";
@@ -24,7 +25,9 @@ export default async function Home() {
       <Navbar />
 
       {/* UPDATED: Passing all 'projects' (irrespective of priority) to the Hero Carousel */}
-      <HeroSection projects={projects} />
+      <HeroVideoReveal>
+        <HeroSection projects={projects} />
+      </HeroVideoReveal>
 
       <TechStack />
 
@@ -43,7 +46,7 @@ export default async function Home() {
 
       <FaqSection />
       <ContactSection />
-      <div className="my-8 md:my-16"><GlowDivider /></div>
+      <GlowDivider />
       <Footer />
     </main>
   );
