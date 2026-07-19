@@ -110,22 +110,21 @@ export function PerspectiveMarqueePlayer(props: PerspectiveMarqueeProps & { isDa
             {[...items, ...items].map((item, i) => (
               <div
                 key={i}
+                className="w-[90px] md:w-[140px]"
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  width: itemWidth,
                   height: "100%",
-                  paddingRight: 16,
-                  transform: "translateY(-7px)",
+                  paddingRight: 8,
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={item.src}
                   alt={item.name}
+                  className="max-h-[24px] md:max-h-[36px]"
                   style={{
-                    maxHeight: "36px",
                     width: "auto",
                     objectFit: "contain",
                     filter: "brightness(0) invert(1)",

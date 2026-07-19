@@ -18,14 +18,45 @@ const lerp = (start: number, end: number, t: number) => start + (end - start) * 
  * cut into the top edge. All arcs are computed in real pixel space, so
  * the shape never seams or distorts, unlike stacked mask-image gradients.
  */
-function buildNotchPath(width: number, height: number, radius: number, notchWidth: number) {
+function buildNotchPath(width: number, height: number, radius: number, notchWidth: number, isMobile: boolean = false) {
     if (width <= 0 || height <= 0) return "";
 
     const r = Math.max(0, Math.min(radius, height / 2, width / 2));
+    const cx = width / 2;
+
+    if (isMobile) {
+        const gap = 24;
+        const pillH = 60;
+        const pr = pillH / 2;
+        const nw = Math.max(0, notchWidth / 2 - pr);
+
+        const outer = [
+            `M ${r} 0`,
+            `L ${width - r} 0`,
+            `A ${r} ${r} 0 0 1 ${width} ${r}`,
+            `L ${width} ${height - r}`,
+            `A ${r} ${r} 0 0 1 ${width - r} ${height}`,
+            `L ${r} ${height}`,
+            `A ${r} ${r} 0 0 1 0 ${height - r}`,
+            `L 0 ${r}`,
+            `A ${r} ${r} 0 0 1 ${r} 0`,
+            "Z",
+        ].join(" ");
+
+        const inner = [
+            `M ${cx - nw} ${gap}`,
+            `A ${pr} ${pr} 0 0 0 ${cx - nw} ${gap + 2 * pr}`,
+            `L ${cx + nw} ${gap + 2 * pr}`,
+            `A ${pr} ${pr} 0 0 0 ${cx + nw} ${gap}`,
+            "Z"
+        ].join(" ");
+
+        return `${outer} ${inner}`;
+    }
+
     const nw = Math.min(notchWidth / 2, width / 2 - r);
     const nh = Math.min(NOTCH_H, height / 2);
     const nr = Math.min(CURVE_R, nh, nw);
-    const cx = width / 2;
 
     return [
         `M ${r} 0`,
@@ -154,13 +185,13 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
     const textOverlayOpacity = useTransform(smoothProgress, [0.4, 0.8], [0, 1]);
     const textOverlayY = useTransform(smoothProgress, [0.4, 0.8], [30, 0]);
 
-    const notchWidth = useTransform(vw, (w) => (w >= 768 ? 560 : 320) as number);
+    const notchWidth = useTransform(vw, (w) => (w >= 768 ? 560 : 280) as number);
 
     // The single source of truth for the notch shape, shared by the
     // clip-path (cuts the video) and the border path (traces the same edge).
-    const pathD = useTransform([widthPx, heightPx, borderRadius, notchWidth], (latest: any) => {
-        const [w, h, r, nw] = latest as number[];
-        return buildNotchPath(w, h, r, nw);
+    const pathD = useTransform([widthPx, heightPx, borderRadius, notchWidth, vw], (latest: any) => {
+        const [w, h, r, nw, currentVw] = latest as number[];
+        return buildNotchPath(w, h, r, nw, currentVw < 768);
     });
     const clipPathValue = useTransform(pathD, (d: any) => (d ? `path('${d}')` : "none"));
 
@@ -184,7 +215,7 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                 >
                     {/* Clipped video layer — the notch is a true cutout, revealing the hero content behind it */}
                     <motion.div
-                        className="absolute inset-0 bg-neutral-900 overflow-hidden cursor-none"
+                        className="absolute inset-0 bg-neutral-900 overflow-hidden cursor-none z-10"
                         style={{ clipPath: clipPathValue, WebkitClipPath: clipPathValue }}
                         onMouseMove={handleMouseMove}
                         onMouseEnter={handleMouseEnter}
@@ -216,9 +247,18 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                         {/* Subtle white overlay for cinematic blending (from inverted-text.html) */}
                         <div className="absolute inset-0 bg-white mix-blend-overlay opacity-15 pointer-events-none z-0" />
 
+                        {/* Inner Bottom Fade Overlay to blend the video while keeping text on top */}
+                        <motion.div
+                            className="absolute bottom-0 left-0 w-full h-32 md:h-64 pointer-events-none z-[5]"
+                            style={{
+                                background: "linear-gradient(to bottom, transparent, black)",
+                                opacity: fadeOpacity,
+                            }}
+                        />
+
                         {/* Title & Description Overlay */}
                         <motion.div
-                            className="absolute bottom-10 left-6 md:bottom-16 md:left-16 max-w-4xl z-10 pointer-events-none"
+                            className="absolute bottom-10 left-6 md:bottom-16 md:left-16 max-w-[375px] md:max-w-4xl z-10 pointer-events-none"
                             style={{ opacity: textOverlayOpacity, y: textOverlayY }}
                         >
                             <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-[1.3] md:leading-[1.2]">
@@ -253,14 +293,14 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                         </motion.div>
                     </motion.div>
 
-                    {/* 3D Perspective Marquee positioned exactly inside the transparent notch area */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[80px] w-[320px] md:w-[560px] z-10 flex items-center justify-center pointer-events-none overflow-hidden rounded-b-[24px]">
+                    {/* 3D Perspective Marquee positioned exactly inside the transparent notch area on desktop, and as a floating pill on mobile */}
+                    <div className="absolute left-1/2 -translate-x-1/2 z-10 flex items-center justify-center pointer-events-none overflow-hidden top-6 md:top-0 h-[60px] md:h-[80px] w-[240px] min-[375px]:w-[280px] md:w-[560px] rounded-full md:rounded-none md:rounded-b-[24px]">
                         <PerspectiveMarqueePlayer />
                     </div>
 
                     {/* Border traced along the exact same path — no seams, no separate corner divs */}
                     <svg
-                        className="absolute inset-0 w-full h-full pointer-events-none z-20"
+                        className="absolute inset-0 w-full h-full pointer-events-none z-[4]"
                         style={{ overflow: "visible" }}
                     >
                         <motion.path d={pathD} fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth={1} />
@@ -269,7 +309,7 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
 
                 {/* Bottom Fade Overlay to blend smoothly into the next section */}
                 <motion.div
-                    className="absolute bottom-0 left-0 w-full h-32 md:h-64 z-[110] pointer-events-none"
+                    className="absolute bottom-0 left-0 w-full h-32 md:h-64 z-[5] pointer-events-none"
                     style={{
                         background: "linear-gradient(to bottom, transparent, black)",
                         opacity: fadeOpacity,
