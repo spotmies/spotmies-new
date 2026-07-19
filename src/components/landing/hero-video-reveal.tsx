@@ -132,7 +132,13 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
         cursorY.set(e.clientY);
     };
 
-    const handleMouseEnter = () => setIsHovering(true);
+    const handleMouseEnter = (e: React.MouseEvent) => {
+        cursorX.jump(e.clientX);
+        cursorY.jump(e.clientY);
+        cursorXSpring.jump(e.clientX);
+        cursorYSpring.jump(e.clientY);
+        setIsHovering(true);
+    };
     const handleMouseLeave = () => setIsHovering(false);
 
     const toggleMute = () => {
@@ -288,7 +294,7 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                                 </div>
                             </h3>
                             <p className="text-base md:text-xl text-white font-light leading-relaxed mix-blend-difference max-w-3xl">
-                                Transform your creative vision into reality with our state-of-the-art AI video services. We blend advanced machine learning with cinematic storytelling to produce stunning, high-fidelity visual narratives—scaling your production capabilities instantly.
+                                Transform your creative vision into reality with our state-of-the-art AI video services. <br /> We blend advanced machine learning with cinematic storytelling to produce stunning, high-fidelity visual narratives—scaling your production capabilities instantly.
                             </p>
                         </motion.div>
                     </motion.div>
@@ -318,20 +324,30 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
             </div>
 
             {/* Custom Cursor Overlay */}
-            <motion.div
-                className="fixed px-6 py-3 rounded-full bg-white/90 backdrop-blur-xl border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.15)] flex items-center justify-center text-black text-sm font-bold tracking-wide pointer-events-none z-[9999]"
-                style={{
-                    left: cursorXSpring,
-                    top: cursorYSpring,
-                    x: "-50%",
-                    y: "-50%",
-                    opacity: isHovering ? 1 : 0,
-                    scale: isHovering ? 1 : 0.8,
-                }}
-                transition={{ opacity: { duration: 0.2 }, scale: { duration: 0.2 } }}
-            >
-                {isMuted ? "Unmute" : "Mute"}
-            </motion.div>
+            <AnimatePresence>
+                {isHovering && (
+                    <motion.div
+                        className="fixed px-6 py-3 rounded-full bg-white/90 backdrop-blur-xl border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.15)] flex items-center justify-center text-black text-sm font-bold tracking-wide pointer-events-none z-[9999]"
+                        style={{
+                            left: cursorXSpring,
+                            top: cursorYSpring,
+                            x: "-50%",
+                            y: "-50%",
+                        }}
+                        initial={{ opacity: 0, scale: 0.3 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{
+                            type: "spring",
+                            damping: 20,
+                            stiffness: 400,
+                            mass: 0.6
+                        }}
+                    >
+                        {isMuted ? "Unmute" : "Mute"}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
