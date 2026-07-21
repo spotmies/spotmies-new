@@ -271,27 +271,6 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                                 <span className="mix-blend-difference block mb-4">
                                     Generative AI filmmaking
                                 </span>
-
-                                <div className="flex flex-wrap items-center gap-1.5 md:gap-2 mt-2">
-                                    {/* Higgsfield Pill */}
-                                    <span className="inline-flex items-center justify-center rounded-full bg-black border border-white/20 shadow-[0_4px_15px_rgba(0,0,0,0.5)] overflow-hidden">
-                                        <img
-                                            src="https://www.aitoolcurator.com/wp-content/uploads/2026/01/higgsfield_logo-scaled.webp"
-                                            alt="Higgsfield"
-                                            className="h-6 md:h-8 w-auto object-cover"
-                                        />
-                                    </span>
-
-                                    {/* Seedance Pill */}
-                                    <span className="inline-flex items-center justify-center px-2.5 py-0.5 md:px-3 md:py-1 rounded-full bg-black border border-white/20 shadow-[0_4px_15px_rgba(0,0,0,0.5)]">
-                                        <img src="/seedance-2-4k-logo.png" alt="Seedance" className="h-4 md:h-5 w-auto object-contain" />
-                                    </span>
-
-                                    {/* ChatGPT Images Pill */}
-                                    <span className="inline-flex items-center justify-center px-2.5 py-0.5 md:px-3 md:py-1 rounded-full bg-black border border-white/20 shadow-[0_4px_15px_rgba(0,0,0,0.5)]">
-                                        <img src="/Chatgpt-images-2-logo.png" alt="ChatGPT" className="h-4 md:h-5 w-auto object-contain" />
-                                    </span>
-                                </div>
                             </h3>
                             <p className="text-base md:text-xl text-white font-light leading-relaxed mix-blend-difference max-w-3xl">
                                 Transform your creative vision into reality with our state-of-the-art AI video services. <br /> We blend advanced machine learning with cinematic storytelling to produce stunning, high-fidelity visual narratives—scaling your production capabilities instantly.
