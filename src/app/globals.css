@@ -2,6 +2,8 @@
 
 /* --- 1. THEME CONFIGURATION (Animations) --- */
 @theme inline {
+  --color-brand-cyan: #00d3f3;
+  
   /* Ripple Animation */
   --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
 
