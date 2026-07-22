@@ -39,7 +39,7 @@ const XIcon = ({ className }: { className?: string }) => (
 export const ContactSection = () => {
     const callUsNumber = process.env.NEXT_PUBLIC_CALL_US_NUMBER || "+91 7416498484";
     const callUsLink = `tel:${callUsNumber.replace(/\s+/g, '')}`;
-    
+
     const hiringNumber = process.env.NEXT_PUBLIC_HIRING_NUMBER || "+91 7207333883";
     const hiringLink = `tel:${hiringNumber.replace(/\s+/g, '')}`;
 
@@ -142,11 +142,11 @@ export const ContactSection = () => {
                             <ContactItem icon={<Phone className="w-5 h-5" />} label="Hiring" value={hiringNumber} href={hiringLink} />
                         </div>
                         <div className="flex flex-col h-full pt-1">
-                            <LocationMap location="Visakhapatnam, India" coordinates="17.7292° N, 83.3213° E" className="w-full" />
+                            <LocationMap location="Visakhapatnam, India" coordinates="17.7423° N, 83.3387° E" className="w-full" />
                             <div className="flex items-start gap-3 mt-4 pl-1">
-                                <LocationOnIcon className="w-6 h-6 text-brand-cyan shrink-0 mt-0.5" />
+                                <LocationOnIcon className="w-6 h-6 text-[#00d3f3] shrink-0 mt-0.5" />
                                 <p className="text-sm text-zinc-500 leading-relaxed">
-                                    AU incubation centre, Andhra university,<br />Visakhapatnam - 530003
+                                    4-58-2/9, MIG-80, North Ext,<br /> Lawsons Bay Colony,<br /> Visakhapatnam, Andhra Pradesh 530013
                                 </p>
                             </div>
                         </div>
@@ -217,12 +217,12 @@ export const ContactSection = () => {
 const ContactItem = ({ icon, label, value, href }: { icon: React.ReactNode, label: string, value: string, href?: string }) => {
     const Content = () => (
         <div className="flex items-center gap-4 group cursor-pointer">
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white group-hover:bg-brand-cyan group-hover:text-black transition-all duration-300">
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white group-hover:border-[#00d3f3] group-hover:text-[#00d3f3] transition-all duration-300">
                 {icon}
             </div>
             <div>
-                <p className="text-sm font-medium text-zinc-500 group-hover:text-zinc-300 transition-colors">{label}</p>
-                <p className="text-white font-medium group-hover:text-white transition-colors">{value}</p>
+                <p className="text-sm font-medium text-zinc-500 transition-colors">{label}</p>
+                <p className="text-white font-medium group-hover:text-[#00d3f3] transition-colors">{value}</p>
             </div>
         </div>
     );
@@ -231,7 +231,7 @@ const ContactItem = ({ icon, label, value, href }: { icon: React.ReactNode, labe
 
 const SocialLink = ({ href, icon }: { href: string; icon: React.ReactNode }) => {
     return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:bg-brand-cyan hover:text-black transition-all duration-300">
+        <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 md:w-10 md:h-10 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:border-[#00d3f3] hover:text-[#00d3f3] transition-all duration-300">
             {icon}
         </a>
     );

@@ -228,27 +228,37 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                         onMouseLeave={handleMouseLeave}
                         onClick={toggleMute}
                     >
-                        {videos.map((src, index) => (
-                            <motion.video
-                                key={src}
-                                ref={(el) => {
-                                    videoRefs.current[index] = el;
-                                }}
-                                src={src}
-                                muted={isMuted}
-                                playsInline
-                                preload={index === 0 || index === 1 ? "auto" : "metadata"}
-                                onEnded={index === currentVideoIndex ? handleVideoEnded : undefined}
-                                className="w-full h-full object-cover absolute inset-0"
-                                initial={false}
-                                animate={{
-                                    opacity: index === currentVideoIndex ? 1 : 0,
-                                    scale: index === currentVideoIndex ? 1 : 1.05,
-                                    filter: index === currentVideoIndex ? "blur(0px)" : "blur(10px)"
-                                }}
-                                transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-                            />
-                        ))}
+                        {/* Aggressively preload the first video into the browser cache */}
+                        <link rel="preload" as="video" href={videos[0]} fetchPriority="high" />
+                        
+                        {videos.map((src, index) => {
+                            const isCurrent = index === currentVideoIndex;
+                            const isNext = index === (currentVideoIndex + 1) % videos.length;
+                            
+                            return (
+                                <motion.video
+                                    key={src}
+                                    ref={(el) => {
+                                        videoRefs.current[index] = el;
+                                    }}
+                                    src={src}
+                                    muted={isMuted}
+                                    playsInline
+                                    poster={index === 0 ? "/video-thumbnail.jpg" : undefined}
+                                    preload={isCurrent ? "auto" : isNext ? "metadata" : "none"}
+                                    {...({ fetchPriority: index === 0 ? "high" : "low" } as any)}
+                                    onEnded={isCurrent ? handleVideoEnded : undefined}
+                                    className="w-full h-full object-cover absolute inset-0"
+                                    initial={false}
+                                    animate={{
+                                        opacity: isCurrent ? 1 : 0,
+                                        scale: isCurrent ? 1 : 1.05,
+                                        filter: isCurrent ? "blur(0px)" : "blur(10px)"
+                                    }}
+                                    transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+                                />
+                            );
+                        })}
 
                         {/* Subtle white overlay for cinematic blending (from inverted-text.html) */}
                         <div className="absolute inset-0 bg-white mix-blend-overlay opacity-15 pointer-events-none z-0" />
