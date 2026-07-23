@@ -76,12 +76,7 @@ export function HeroSection({ projects }: { projects: Project[] }) {
                     showHint={false}
                 />
             </div>
-            {/* LAYER 0: Ambient Color Blobs */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-cyan/20 rounded-full blur-[80px] md:blur-[100px] animate-blob-bounce mix-blend-screen" />
-                <div className="absolute top-[20%] right-[-10%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-brand-blue/20 rounded-full blur-[100px] md:blur-[120px] animate-blob-bounce animation-delay-2000 mix-blend-screen" />
-                <div className="absolute bottom-[-10%] left-[20%] w-[400px] md:w-[600px] h-[300px] md:h-[500px] bg-brand-teal/15 rounded-full blur-[100px] md:blur-[120px] animate-blob-bounce animation-delay-4000 mix-blend-screen" />
-            </div>
+
 
             {/* LAYER 1: Spotlight */}
             <motion.div
