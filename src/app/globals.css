@@ -3,6 +3,12 @@
 /* --- 1. THEME CONFIGURATION (Animations) --- */
 @theme inline {
   --color-brand-cyan: #00d3f3;
+  --color-brand-cyan-dark: #008ba1;
+  --color-brand-cyan-deep: #004854;
+  --color-brand-teal: #00b4d8;
+  --color-brand-blue: #0077b6;
+  --color-brand-darkblue: #023e8a;
+  --color-brand-night: #050505;
   
   /* Ripple Animation */
   --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
@@ -51,16 +57,19 @@
   --animate-blob-bounce: blob-bounce 10s infinite ease-in-out;
 
   @keyframes blob-bounce {
-
-    0%,
-    100% {
-      transform: translate(0, 0);
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
     }
-
-    50% {
-      transform: translate(20px, -20px);
+    33% {
+      transform: translate(30px, -50px) scale(1.2);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.8);
     }
   }
+
+  /* Pulse Slow */
+  --animate-pulse-slow: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 /* --- 2. BASE STYLES --- */
