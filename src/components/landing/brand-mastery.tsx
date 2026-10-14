@@ -116,8 +116,9 @@ export default function BrandMastery() {
     const [isMobile, setIsMobile] = useState(false);
 
     // SCROLL TRIGGER
+    // Starts once 45% of the section is on screen, so the opening plays where people can see it
     const isInView = useInView(containerRef, {
-        amount: 0.3,
+        amount: 0.45,
         once: false
     });
 
@@ -136,7 +137,8 @@ export default function BrandMastery() {
 
     // --- PHYSICS CONFIG ---
     const bezierEase: [number, number, number, number] = [0.77, 0, 0.175, 1];
-    const springTransition = { type: "spring", stiffness: 200, damping: 20 };
+    // Eased, no overshoot: the old spring bounced each pill past full size and back
+    const pillTransition = { type: "tween", duration: 0.7, ease: [0.16, 1, 0.3, 1] };
 
     // --- DYNAMIC DISTANCES ---
     // UPDATED: Set to 570 as requested
@@ -148,10 +150,12 @@ export default function BrandMastery() {
     const mobileTextYOffset = 30;
 
     const blobInitialX = 50;
+    const barWidth = isMobile ? 500 : expandDist * 2;
     const textInitialX = 90;
 
     return (
         <section
+            id="brand"
             ref={containerRef}
             className="relative w-full bg-black flex flex-col items-center justify-center overflow-hidden font-sans pt-16 pb-24 md:pt-24 md:pb-32"
         >
@@ -171,22 +175,6 @@ export default function BrandMastery() {
                     With over 7 years of experience in the industry, our offerings have evolved into a set of services that complement each other and allow us to design, develop, implement, maintain, and extend a consistent experience across all touchpoints.
                 </motion.p>
             </div>
-
-            {/* SVG FILTER for Goo Effect */}
-            <svg className="absolute w-0 h-0 pointer-events-none">
-                <defs>
-                    <filter id="goo">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                        <feColorMatrix
-                            in="blur"
-                            mode="matrix"
-                            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-                            result="goo"
-                        />
-                        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-                    </filter>
-                </defs>
-            </svg>
 
             {/* --- 2. ANIMATION CANVAS --- */}
             <div className="relative w-full max-w-[1362px] h-[600px] md:h-[600px] flex items-center justify-center">
@@ -219,26 +207,30 @@ export default function BrandMastery() {
                     />
                 </motion.div>
 
-                {/* LIQUID LAYER */}
+                {/* LIQUID LAYER
+                    Goo made from CSS filters, which run on the GPU: the layer is blurred, then high contrast snaps the blurred
+                    edges back to crisp shapes that merge where they overlap, and lets the shrinking end blobs melt away.
+                    (The old SVG filter was redrawn on the CPU every frame and made the opening stutter.) The black fill
+                    gives contrast a base. */}
                 <div
-                    className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center"
-                    style={{ filter: "url(#goo)" }}
+                    className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-black"
+                    style={{ filter: "blur(10px) contrast(20)" }}
                 >
+                    {/* Starts as an 80px-wide bead between the blobs and stretches to full width. Drawn at full size and
+                        scaled, so the browser only moves pixels instead of re-laying out the bar each frame. */}
                     <motion.div
-                        initial={{ width: 80, height: 90, opacity: 1 }}
+                        initial={{ scaleX: 80 / barWidth, scaleY: 1, opacity: 1 }}
                         animate={{
-                            // UPDATED: Uses expandDist (570)
-                            width: isExpanded ? (isMobile ? 500 : expandDist * 2) : 80,
-                            height: isExpanded ? 0 : 90,
+                            scaleX: isExpanded ? 1 : 80 / barWidth,
+                            scaleY: isExpanded ? 0 : 1,
                             opacity: isExpanded ? 0 : 1,
-                            rotate: isMobile ? 63 : 0
                         }}
                         transition={{
-                            width: { duration: 1.2, ease: bezierEase },
-                            height: { duration: 0.4, delay: isExpanded ? 1.0 : 0, ease: "easeOut" },
-                            opacity: { duration: 0.1, delay: isExpanded ? 1.1 : 0, ease: "easeOut" },
-                            rotate: { duration: 0 }
+                            scaleX: { duration: 1.2, ease: bezierEase },
+                            scaleY: { duration: 0.4, delay: isExpanded ? 1.0 : 0, ease: "easeOut" },
+                            opacity: { duration: 0.2, delay: isExpanded ? 1.1 : 0, ease: "easeOut" },
                         }}
+                        style={{ width: barWidth, height: 90, rotate: isMobile ? 63 : 0 }}
                         className="absolute bg-white rounded-full will-change-transform"
                     />
 
@@ -347,7 +339,7 @@ export default function BrandMastery() {
                             isExpanded={isExpanded}
                             isMobile={isMobile}
                             variant="inverted-dark"
-                            transition={springTransition}
+                            transition={pillTransition}
                             baseDelay={1.0}
                         />
                     ))}
@@ -359,7 +351,7 @@ export default function BrandMastery() {
                             isExpanded={isExpanded}
                             isMobile={isMobile}
                             variant="inverted-light"
-                            transition={springTransition}
+                            transition={pillTransition}
                             baseDelay={1.4}
                         />
                     ))}
@@ -429,24 +421,21 @@ function Pill({ label, icon, top, left, mobileTop, mobileLeft, delay, isExpanded
             animate={{
                 scale: isExpanded ? (isMobile ? 0.9 : 1) : 0,
                 opacity: isExpanded ? 1 : 0,
-                zIndex: isHovered ? 100 : 10,
             }}
+            whileHover={isPrimary ? undefined : { scale: 1.1, transition: { duration: 0.25 } }}
             transition={{
                 ...transition,
                 delay: isExpanded ? baseDelay + delay : 0,
             }}
-            style={{
-                top: finalTop,
-                left: finalLeft,
-                transform: "translate(-50%, -50%)"
-            }}
+            // Centring comes from the -translate classes (the CSS translate property), which Framer's scale leaves alone
+            style={{ top: finalTop, left: finalLeft, zIndex: isHovered ? 100 : 10 }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={handleClick} // UPDATED: Added click handler
-            className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium whitespace-nowrap cursor-pointer pointer-events-auto transition-all duration-300
+            className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium whitespace-nowrap cursor-pointer pointer-events-auto will-change-transform transition-[box-shadow,color,border-color] duration-300
                 ${isPrimary
                     ? "bg-white text-black shadow-lg shadow-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] active:scale-95"
-                    : "bg-neutral-900 border border-white/20 text-gray-400 hover:text-white hover:border-white/40 hover:scale-110"
+                    : "bg-neutral-900 border border-white/20 text-gray-400 hover:text-white hover:border-white/40"
                 }
             `}
         >

@@ -2,6 +2,33 @@ import { Project } from "@/types/types";
 
 export const PROJECT_DATA: Project[] = [
     {
+        id: 28,
+        title: "OpenPlan AI",
+        category: "Web App, AI/Hardware",
+        description: "The AI planning layer for hardware teams, working alongside the PLM they already use.",
+        image: "/case-studies/openplan/openplan.webp",
+        link: "https://openplanai.com/",
+        client: "Spotmies",
+        timeline: "Ongoing",
+        role: "Built in-house",
+        rating: 5,
+        priority: true,
+        introduction: "OpenPlan is our own AI product for teams that build physical products, from consumer electronics and IoT to robotics, drones, EV hardware and industrial equipment. It brings requirements, BOMs, engineering changes and milestone reviews into one workspace, with an AI Architect that turns a product spec into a full project plan.",
+        challenge: "Hardware teams plan across disconnected tools: BOMs in Excel, timelines in Jira, sign-offs in email and Slack. Enterprise PLM is too heavy for fast-moving teams and lightweight task tools don't understand parts, revisions or gate reviews, so requirements get lost and changes slip through without a trail.",
+        approach: "We designed and built OpenPlan as a planning layer that sits alongside existing CAD and PLM tools such as SolidWorks, Onshape, Teamcenter and Windchill rather than replacing them. The AI Architect reads a PRD, asks clarifying questions, then generates modules, milestones and timelines. Requirements break down in five tiers from stakeholder need to component and link to multi-level BOMs, while ECO approvals, deviation tracking and PDR/CDR/MRR gate reviews all run in the same workspace, summarised in one Command Center.",
+        result: "Hardware teams go from a product spec to a structured, traceable plan in one place, with every requirement linked to a part and every change approved on record. OpenPlan is live with free, Pro and Enterprise plans.",
+        testimonial: undefined,
+        gallery: [
+            "/case-studies/openplan/openplan.webp",
+            "/case-studies/openplan/openplan1.webp",
+            "/case-studies/openplan/openplan2.webp",
+            "/case-studies/openplan/openplan3.webp",
+            "/case-studies/openplan/openplan4.webp",
+            "/case-studies/openplan/openplan5.webp",
+            "/case-studies/openplan/openplan6.webp"
+        ]
+    },
+    {
         id: 24,
         title: "Reaidy.io",
         category: "Web App, AI/Recruitment",

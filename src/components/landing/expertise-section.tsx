@@ -9,6 +9,7 @@ import {
     type MotionValue
 } from "framer-motion";
 import { Brain, Cuboid, Smartphone, Cloud, PenTool } from "lucide-react";
+import { OutlineText } from "@/components/ui/outline-text";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -109,18 +110,10 @@ const Card3D = ({ index, title, description, icon: Icon, image, number }: CardPr
                 }}
                 className="absolute -top-[90px] -right-[15px] z-0 pointer-events-none select-none transition-all duration-500 ease-out group-hover:opacity-100 opacity-90"
             >
-                <span
-                    className="text-[9.5rem] font-bold leading-none font-sans tracking-tighter"
-                    style={{
-                        background: "linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 100%)",
-                        backgroundClip: "text",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        WebkitTextStroke: "1px rgba(255,255,255,0.25)"
-                    }}
-                >
+                {/* White 40% to 5%, pre-mixed over the #050505 section */}
+                <OutlineText from="#696969" to="#121212" stroke="rgba(255,255,255,0.25)" className="text-[9.5rem] font-bold leading-none font-sans tracking-tighter">
                     {number}
-                </span>
+                </OutlineText>
             </motion.div>
 
             {/* --- LAYER 1: CARD CONTAINER (Middle Z) --- */}

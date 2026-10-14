@@ -1,8 +1,14 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   /* config options here */
   devIndicators: false,
+  // Pin the workspace root so a stray lockfile in a parent dir (e.g. ~/package-lock.json)
+  // doesn't make Turbopack resolve modules like `tailwindcss` from the wrong directory.
+  turbopack: {
+    root: path.join(__dirname),
+  },
   images: {
     remotePatterns: [
       {

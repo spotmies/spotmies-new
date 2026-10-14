@@ -1,45 +1,11 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import { MessageSquareQuote } from "lucide-react";
-import { motion, useSpring, useMotionTemplate, useMotionValue } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { PixelAnimation } from "@/components/ui/pixel-animation";
-import { cn } from "@/lib/utils";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 import { Project } from "@/types/types";
-
-const MagneticButton = ({ children, className, onClick }: { children: React.ReactNode; className?: string; onClick?: () => void }) => {
-    const ref = useRef<HTMLButtonElement>(null);
-    const x = useSpring(0, { stiffness: 150, damping: 15, mass: 0.1 });
-    const y = useSpring(0, { stiffness: 150, damping: 15, mass: 0.1 });
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const { clientX, clientY } = e;
-        if (!ref.current) return;
-        const { left, top, width, height } = ref.current.getBoundingClientRect();
-        const centerX = left + width / 2;
-        const centerY = top + height / 2;
-        x.set((clientX - centerX) * 0.1);
-        y.set((clientY - centerY) * 0.1);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.button
-            ref={ref}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ x, y }}
-            onClick={onClick}
-            className={cn("relative group", className)}
-        >
-            {children}
-        </motion.button>
-    );
-};
 
 export function HeroSection({ projects }: { projects: Project[] }) {
     const mouseX = useMotionValue(0);
