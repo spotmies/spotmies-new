@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Mail } from "lucide-react";
 
-const faqs = [
+const DEFAULT_FAQS = [
     {
         question: "What services do you offer?",
         answer: "We provide end-to-end digital solutions including UI/UX design, full-stack web development, mobile app creation, and enterprise software. We specialize in building scalable, future-proof products using modern tech stacks."
@@ -32,12 +32,31 @@ const faqs = [
     }
 ];
 
-export const FaqSection = () => {
+interface FaqSectionProps {
+    faqs?: { question: string; answer: string }[];
+    eyebrow?: string;
+    title?: string;
+    titleMuted?: string;
+    intro?: string;
+    ctaLabel?: string;
+    // id of the section the button scrolls to
+    ctaTarget?: string;
+}
+
+export const FaqSection = ({
+    faqs = DEFAULT_FAQS,
+    eyebrow = "Support",
+    title = "Common",
+    titleMuted = "questions.",
+    intro = "Everything you need to know about our product and billing. Can’t find the answer you’re looking for?",
+    ctaLabel = "Contact our team",
+    ctaTarget = "contact",
+}: FaqSectionProps = {}) => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     // Function to handle smooth scrolling
     const scrollToContact = () => {
-        const contactSection = document.getElementById('contact');
+        const contactSection = document.getElementById(ctaTarget);
         if (contactSection) {
             contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -59,29 +78,32 @@ export const FaqSection = () => {
                             <motion.span
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
                                 transition={{ duration: 0.5 }}
                                 className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/60 text-xs font-medium tracking-wider uppercase mb-6"
                             >
-                                Support
+                                {eyebrow}
                             </motion.span>
 
                             <motion.h2
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: 0.1 }}
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-space tracking-tight leading-[1.1] bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400"
                             >
-                                Common <br className="hidden lg:block" />
-                                <span className="text-white/50">questions.</span>
+                                {title} <br className="hidden lg:block" />
+                                <span className="text-white/50">{titleMuted}</span>
                             </motion.h2>
 
                             <motion.p
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
                                 className="text-lg text-neutral-400 leading-relaxed mb-8 max-w-md"
                             >
-                                Everything you need to know about our product and billing. Can’t find the answer you’re looking for?
+                                {intro}
                             </motion.p>
 
                             {/* Button with Scroll Handler */}
@@ -89,11 +111,12 @@ export const FaqSection = () => {
                                 onClick={scrollToContact}
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: 0.3 }}
                                 className="flex items-center gap-3 px-6 py-3 rounded-full bg-white text-black font-medium hover:bg-neutral-200 transition-colors group cursor-pointer"
                             >
                                 <Mail className="w-4 h-4" />
-                                <span>Contact our team</span>
+                                <span>{ctaLabel}</span>
                             </motion.button>
                         </div>
                     </div>
@@ -106,24 +129,20 @@ export const FaqSection = () => {
                             return (
                                 <motion.div
                                     key={index}
-                                    layout
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-50px" }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
                                     onClick={() => setOpenIndex(isOpen ? null : index)}
                                     className={cn(
-                                        "group cursor-pointer overflow-hidden relative transition-all duration-500",
+                                        "group cursor-pointer overflow-hidden relative transition-colors duration-500",
                                         "rounded-[24px] border border-white/[0.08]",
                                         isOpen
                                             ? "bg-[#161616]"
                                             : "bg-[#0A0A0A] hover:bg-[#121212]"
                                     )}
                                 >
-                                    <motion.div
-                                        layout="position"
-                                        className="flex items-start justify-between p-6 md:p-8 gap-4"
-                                    >
+                                    <div className="flex items-start justify-between p-6 md:p-8 gap-4">
                                         <span className={cn(
                                             "text-lg md:text-xl font-medium tracking-tight transition-colors duration-300",
                                             isOpen ? "text-white" : "text-white/80 group-hover:text-white"
@@ -152,7 +171,7 @@ export const FaqSection = () => {
                                                 )} />
                                             </motion.div>
                                         </div>
-                                    </motion.div>
+                                    </div>
 
                                     <AnimatePresence initial={false}>
                                         {isOpen && (

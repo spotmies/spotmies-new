@@ -1,9 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
+// Soft blur along the bottom edge of the screen, which steps aside once the footer scrolls into view so it never covers it.
+// It lives in the root layout and so outlives page changes: the footer it watches is found again on every route,
+// because the previous page's footer is gone after client-side navigation.
 export function BottomBlur() {
+  const pathname = usePathname();
   const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   useEffect(() => {
@@ -37,11 +42,11 @@ export function BottomBlur() {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   return (
     <div
-      className={`fixed bottom-0 left-0 w-full z-50 pointer-events-none transition-opacity duration-500 ${isFooterVisible ? "opacity-0" : "opacity-100"
+      className={`fixed bottom-0 left-0 w-full z-50 pointer-events-none transition-[opacity,transform] duration-500 ease-out ${isFooterVisible ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
         }`}
     >
       <ProgressiveBlur

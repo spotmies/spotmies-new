@@ -7,6 +7,7 @@ import { AmbientBackground } from "@/components/ui/ambient-background";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
+import { FOUNDERS } from "@/data/team";
 
 // --- ANIMATION VARIANTS ---
 const fadeUpVariant = {
@@ -23,37 +24,6 @@ const fadeUpVariant = {
 };
 
 export function FoundersSection() {
-    const founders = [
-        {
-            id: 1,
-            name: "Satish Kumar Saride",
-            designation: "Co-Founder & CEO",
-            image: "https://spotmiesstorage.blob.core.windows.net/media/satish.jpeg",
-            link: "https://www.linkedin.com/in/saridesatishkumar/"
-        },
-        {
-            id: 2,
-            name: "Sekhar Javvadi",
-            designation: "Co-Founder & CTO",
-            image: "https://spotmiesstorage.blob.core.windows.net/media/sekhar.jpeg",
-            link: "https://www.linkedin.com/in/sekhar-javvadi/"
-        },
-        {
-            id: 3,
-            name: "Hemanth Kumar",
-            designation: "Co-Founder",
-            image: "https://spotmiesstorage.blob.core.windows.net/media/hemanth.jpeg",
-            link: "https://www.linkedin.com/in/hemanth-kumar-veeranala-967ba318a/"
-        },
-        {
-            id: 4,
-            name: "Naveen Kumar",
-            designation: "Co-Founder & Head of Product Design",
-            image: "https://spotmiesstorage.blob.core.windows.net/media/naveen.jpeg",
-            link: "https://www.linkedin.com/in/naveen-kumar-atava-318ba318a/"
-        },
-    ];
-
     return (
         <section id="founders" className="relative w-full bg-[#050505] py-24 px-6 md:px-6 overflow-visible">
             <AmbientBackground intensity="subtle" />
@@ -70,7 +40,7 @@ export function FoundersSection() {
                     >
                         {/* Image Stack */}
                         <div className="w-full flex items-center justify-center lg:justify-start mb-12">
-                            <AnimatedTooltip items={founders} />
+                            <AnimatedTooltip items={FOUNDERS} />
                         </div>
 
                         <motion.div

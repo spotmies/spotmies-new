@@ -7,19 +7,11 @@ import {
     PenTool,
     Code2,
     Rocket,
-    ArrowUpRight,
-    HeartPulse,
-    Landmark,
-    Clapperboard,
-    Truck,
-    Sprout,
-    Blocks,
-    Plane,
-    Users,
-    GraduationCap,
-    ShoppingBag
+    ArrowUpRight
 } from "lucide-react";
 import { AmbientBackground } from "@/components/ui/ambient-background";
+import { IndustriesGrid } from "@/components/landing/industries-grid";
+import { NoiseOverlay } from "@/components/ui/noise-overlay";
 
 const fadeUpVariant = {
     hidden: { opacity: 0, y: 30 },
@@ -33,12 +25,6 @@ const fadeUpVariant = {
         },
     }),
 };
-
-const NoiseOverlay = () => (
-    <div className="absolute inset-0 pointer-events-none z-50 opacity-[0.03] mix-blend-overlay"
-        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
-    />
-);
 
 export function ProcessSection() {
     return (
@@ -163,19 +149,7 @@ export function ProcessSection() {
                     </motion.h2>
                 </div>
 
-                {/* The Grid Container */}
-                <div className="grid grid-cols-2 md:grid-cols-5 border-l border-t border-white/10 bg-black/40 backdrop-blur-sm">
-                    <TechItem name="Healthcare" icon={HeartPulse} index={0} />
-                    <TechItem name="Fintech" icon={Landmark} index={1} />
-                    <TechItem name="AgriTech" icon={Sprout} index={2} />
-                    <TechItem name=" Crypto" icon={Blocks} index={3} />
-                    <TechItem name="Travel" icon={Plane} index={4} />
-                    <TechItem name="Entertainment" icon={Clapperboard} index={5} />
-                    <TechItem name="Logistics & Supply Chain" icon={Truck} index={6} />
-                    <TechItem name="HRTech" icon={Users} index={7} />
-                    <TechItem name="EdTech" icon={GraduationCap} index={8} />
-                    <TechItem name="Retail" icon={ShoppingBag} index={9} />
-                </div>
+                <IndustriesGrid />
             </section>
         </div>
     );
@@ -188,7 +162,8 @@ const ProcessStep = ({ number, title, desc, icon: Icon, index }: any) => (
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
         variants={fadeUpVariant}
-        className="p-8 md:p-10 rounded-3xl bg-white/5 border border-white/10 group hover:bg-white/10 transition-all duration-500 relative overflow-hidden flex flex-col"
+        // Only the hover colour transitions in CSS; transition-all also chased Framer's fade-in and made the cards flicker on load
+        className="p-8 md:p-10 rounded-3xl bg-white/5 border border-white/10 group hover:bg-white/10 transition-colors duration-500 relative overflow-hidden flex flex-col"
     >
         <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-500 text-8xl font-bold text-white select-none">
             {number}
@@ -200,28 +175,5 @@ const ProcessStep = ({ number, title, desc, icon: Icon, index }: any) => (
 
         <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white group-hover:text-[#00eef9] transition-colors duration-300">{title}</h3>
         <p className="text-neutral-400 text-base md:text-lg leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">{desc}</p>
-    </motion.div>
-);
-
-const TechItem = ({ name, icon: Icon, index }: { name: string, icon: any, index: number }) => (
-    <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: index * 0.05 }}
-        // UPDATED:
-        // 1. Used 'aspect-square' uniformly on all screens to guarantee a perfect grid.
-        // 2. Adjusted padding to 'p-3 md:p-6' to prevent content from touching edges on small screens.
-        className="aspect-square border-r border-b border-white/10 flex flex-col items-center justify-center p-3 md:p-6 group hover:bg-white/5 transition-all cursor-crosshair relative"
-    >
-        {/* UPDATED: Slightly smaller icon container on mobile (w-12 h-12) to save vertical space */}
-        <div className="w-12 h-12 md:w-16 md:h-16 bg-white/5 rounded-full mb-3 md:mb-6 flex items-center justify-center text-neutral-400 group-hover:scale-110 group-hover:text-[#00eef9] group-hover:bg-[#00eef9]/10 transition-all duration-300">
-            <Icon className="w-6 h-6 md:w-8 md:h-8" />
-        </div>
-        
-        {/* UPDATED: text-xs on mobile to handle long words like 'Supply Chain' gracefully */}
-        <span className="text-xs md:text-sm font-bold uppercase tracking-widest text-neutral-500 group-hover:text-white transition-colors text-center">
-            {name}
-        </span>
     </motion.div>
 );

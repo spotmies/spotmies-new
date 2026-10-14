@@ -5,47 +5,13 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { AmbientBackground } from "@/components/ui/ambient-background";
 import { cn } from "@/lib/utils";
+import { ALL_COMPANIES, logoToneClass } from "@/data/companies";
 
-const ALL_COMPANIES = [
-    { name: "Zin in Thuiswerken", desc: "Professional Services", src: "https://spotmiesstorage.blob.core.windows.net/media/comp1.png" },
-    { name: "A Square GoKarting", desc: "Entertainment", src: "https://spotmiesstorage.blob.core.windows.net/media/comp2.png" },
-    { name: "SMARTFALCON", desc: "Blockchain", src: "https://spotmiesstorage.blob.core.windows.net/media/comp3.png" },
-    { name: "Credit Report", desc: "Fintech", src: "https://spotmiesstorage.blob.core.windows.net/media/comp4.png" },
-    { name: "Andhra University Incubation Center", desc: "Incubation Center", src: "https://spotmiesstorage.blob.core.windows.net/media/comp5.png" },
-    { name: "Schemax Tech", desc: "Software Development", src: "https://spotmiesstorage.blob.core.windows.net/media/comp6.png" },
-    { name: "Sweken IT Solutions", desc: "Software Development", src: "https://spotmiesstorage.blob.core.windows.net/media/comp7.png" },
-    { name: "Vihaan Electrix", desc: "Travel", src: "https://spotmiesstorage.blob.core.windows.net/media/comp8.png" },
-    { name: "DecenTrialz", desc: "Healthcare", src: "https://spotmiesstorage.blob.core.windows.net/media/comp9.png" },
-    { name: "ADVAIT LABS", desc: "Healthcare", src: "https://spotmiesstorage.blob.core.windows.net/media/comp10.png" },
-    { name: "Chalo Ride", desc: "Travel", src: "https://spotmiesstorage.blob.core.windows.net/media/comp11.png" },
-    { name: "Mr Bikes", desc: "Travel", src: "https://spotmiesstorage.blob.core.windows.net/media/comp12.png" },
-    { name: "IOX Academy", desc: "Edtech", src: "https://spotmiesstorage.blob.core.windows.net/media/comp13.png" },
-    { name: "ID No Drafts", desc: "Travel", src: "https://spotmiesstorage.blob.core.windows.net/media/comp14.png" },
-    { name: "CGRUM", desc: "Fintech", src: "https://spotmiesstorage.blob.core.windows.net/media/comp15.png" },
-    { name: "Nandikrushi", desc: "AgriTech", src: "https://spotmiesstorage.blob.core.windows.net/media/comp16.png" },
-    { name: "HRDInc", desc: "HRTech", src: "https://spotmiesstorage.blob.core.windows.net/media/comp17.png" },
-    { name: "ADVON", desc: "Fintech", src: "https://spotmiesstorage.blob.core.windows.net/media/comp18.png" },
-    { name: "INDIESKULL-SYNDICATE", desc: "NFTs", src: "https://spotmiesstorage.blob.core.windows.net/media/comp19.png" },
-    { name: "My Body Qode", desc: "Healthcare", src: "https://spotmiesstorage.blob.core.windows.net/media/comp20.png" },
-    { name: "SafeGuard air", desc: "Healthcare", src: "https://spotmiesstorage.blob.core.windows.net/media/comp21.png" },
-    { name: "Orfus", desc: "HRTech", src: "https://spotmiesstorage.blob.core.windows.net/media/comp22.png" },
-    { name: "Vitals", desc: "Healthcare", src: "https://spotmiesstorage.blob.core.windows.net/media/comp23.png" },
-    { name: "VarunMotors", desc: "Travel", src: "https://spotmiesstorage.blob.core.windows.net/media/comp24.png" },
-    { name: "Reaidy", desc: "HRTech", src: "https://www.reaidy.io/assets/logo_dark-DMRlJ8_-.png" },
-    { "name": "Awaken", "desc": "Fintech", "src": "https://spotmiesstorage.blob.core.windows.net/media/awaken0.png" },
-    { "name": "Amero X", "desc": "Blockchain & Fintech", "src": "https://spotmiesstorage.blob.core.windows.net/media/amero0.png" },
-    { "name": "BoomBoomTalk", "desc": "Social", "src": "https://spotmiesstorage.blob.core.windows.net/media/boomboomtalk0.png" },
-    { "name": "Commuter", "desc": "Travel", "src": "https://spotmiesstorage.blob.core.windows.net/media/commuter0.png" },
-    { "name": "EduMoon", "desc": "EdTech", "src": "https://spotmiesstorage.blob.core.windows.net/media/edumoon0.png" },
-    { "name": "Farm Vaidya", "desc": "AgriTech", "src": "https://spotmiesstorage.blob.core.windows.net/media/farmvidya0.png" },
-    { "name": "Mobile Masala", "desc": "Entertainment", "src": "https://spotmiesstorage.blob.core.windows.net/media/mobile-masala0.png" },
-    { "name": "OROLEXA", "desc": "Healthcare", "src": "https://spotmiesstorage.blob.core.windows.net/media/orelexa0.png" },
-    { "name": "TheReachX", "desc": "Marketing", "src": "https://spotmiesstorage.blob.core.windows.net/media/reachx0.png" },
-    { "name": "Referral Bazaar", "desc": "Retail", "src": "https://spotmiesstorage.blob.core.windows.net/media/referalbazaar0.png" },
-    { "name": "Stoory", "desc": "Marketing", "src": "https://spotmiesstorage.blob.core.windows.net/media/stoory0.png" },
-    { "name": "Teckybot", "desc": "EdTech", "src": "https://spotmiesstorage.blob.core.windows.net/media/teckybot0.png" },
-    { "name": "WingDent", "desc": "Healthcare", "src": "https://spotmiesstorage.blob.core.windows.net/media/wingdent0.png" }
-];
+// Hovered logos show in their own colours on the white tile
+const LOGO_HOVER_CLASS = "group-hover:filter-none";
+// Logos drawn white for dark backgrounds get a dark chip on the white hover tile, or they would vanish
+const DARK_CHIP = ["Teckybot", "EduMoon"];
+const DARK_CHIP_CLASS = "group-hover:bg-neutral-950 group-hover:p-2 group-hover:rounded-lg group-hover:shadow-sm";
 
 const TOTAL_CELLS = 15;
 
@@ -89,20 +55,12 @@ export default function ClientsSectionDark() {
                     if (img) img.src = newData.src;
                     if (text) text.innerText = newData.desc;
 
-                    const isSpecial = ["WingDent", "OROLEXA", "Awaken"].includes(newData.name);
-                    const hasDarkLogoBox = ["Teckybot", "EduMoon"].includes(newData.name);
+                    const hasDarkLogoBox = DARK_CHIP.includes(newData.name);
 
                     img.className = "logo-img w-auto h-10 md:h-16 max-w-[80%] object-contain opacity-0 scale-50 transition-all ease-[cubic-bezier(0.34,1.56,0.64,1)]";
 
-                    if (isSpecial) {
-                        img.classList.add("grayscale", "brightness-200", "group-hover:grayscale-0", "group-hover:brightness-100");
-                    } else {
-                        img.classList.add("brightness-0", "invert", "group-hover:invert-0", "group-hover:brightness-100");
-                    }
-
-                    if (hasDarkLogoBox) {
-                        img.classList.add("group-hover:bg-neutral-950", "group-hover:p-2", "group-hover:rounded-lg", "group-hover:shadow-sm");
-                    }
+                    img.classList.add(...logoToneClass(newData).split(" "), LOGO_HOVER_CLASS);
+                    if (hasDarkLogoBox) img.classList.add(...DARK_CHIP_CLASS.split(" "));
 
                     parent.className = cn(
                         "group relative flex flex-col justify-center items-center p-4 md:p-6 aspect-[4/3] rounded-xl md:rounded-2xl border border-transparent transition-all duration-300 cursor-pointer bg-transparent opacity-100 group-hover/grid:blur-[2px] group-hover/grid:opacity-40 hover:!blur-none hover:!opacity-100 hover:!scale-110 hover:bg-white hover:shadow-2xl hover:shadow-black/50 hover:z-10",
@@ -193,8 +151,7 @@ export default function ClientsSectionDark() {
                 >
                     {Array.from({ length: TOTAL_CELLS }).map((_, index) => {
                         const initialData = ALL_COMPANIES[index];
-                        const isSpecial = ["WingDent", "OROLEXA", "Awaken"].includes(initialData.name);
-                        const hasDarkLogoBox = ["Teckybot", "EduMoon"].includes(initialData.name);
+                        const hasDarkLogoBox = DARK_CHIP.includes(initialData.name);
 
                         const isLastItem = index === TOTAL_CELLS - 1;
 
@@ -216,10 +173,9 @@ export default function ClientsSectionDark() {
                                     alt={initialData.name}
                                     className={cn(
                                         "logo-img w-auto h-10 md:h-16 max-w-[80%] object-contain opacity-100 scale-100 transition-all ease-[cubic-bezier(0.34,1.56,0.64,1)]",
-                                        isSpecial
-                                            ? "grayscale brightness-200 group-hover:grayscale-0 group-hover:brightness-100"
-                                            : "brightness-0 invert group-hover:invert-0 group-hover:brightness-100",
-                                        hasDarkLogoBox && "group-hover:bg-neutral-950 group-hover:p-2 group-hover:rounded-lg group-hover:shadow-sm"
+                                        logoToneClass(initialData),
+                                        LOGO_HOVER_CLASS,
+                                        hasDarkLogoBox && DARK_CHIP_CLASS
                                     )}
                                 />
                                 <span className="subtext absolute bottom-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 text-xs font-bold tracking-wide text-center w-full px-2 pointer-events-none text-black">

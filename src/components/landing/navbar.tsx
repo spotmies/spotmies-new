@@ -6,7 +6,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useScroll, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
+import { MobileServicesList, ServicesMenu } from "@/components/landing/services-menu";
 
 // --- CUSTOM HOOK: SCROLL SPY ---
 // Tracks which section is currently in the middle of the viewport
@@ -53,6 +54,7 @@ export default function Navbar() {
     const { scrollY } = useScroll();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
     // 1. Define IDs to track for scroll highlighting
     const sectionIds = ["services", "portfolio", "process", "contact"];
@@ -108,6 +110,9 @@ export default function Navbar() {
         // 1. Home page section highlight (Only if tracked by Observer)
         if (pathname === "/" && activeSection === item.id) return true;
 
+        // Every service page counts as being in Services
+        if (item.id === "services" && pathname.startsWith("/expertise/")) return true;
+
         // 2. Exact page match (e.g., /about)
         if (pathname === item.href) return true;
 
@@ -153,6 +158,10 @@ export default function Navbar() {
                     {navItems.map((item) => {
                         const isActive = isItemActive(item);
 
+                        if (item.id === "services") {
+                            return <ServicesMenu key={item.name} active={isActive} pathname={pathname} onSectionLink={(e) => handleScroll(e, item.href)} />;
+                        }
+
                         return (
                             <Link
                                 key={item.name}
@@ -165,7 +174,7 @@ export default function Navbar() {
                             >
                                 {item.name}
                                 <span className={cn(
-                                    "absolute bottom-0 left-0 h-0.5 bg-[#00d3f3] transition-all duration-300 ease-out",
+                                    "absolute bottom-0 left-0 h-[1.5px] rounded-full bg-[#00d3f3] transition-all duration-300 ease-out",
                                     isActive ? "w-full" : "w-0 group-hover:w-full"
                                 )} />
                             </Link>
@@ -201,12 +210,60 @@ export default function Navbar() {
                         animate={{ opacity: 1, clipPath: "circle(150% at 100% 0%)" }}
                         exit={{ opacity: 0, clipPath: "circle(0% at 100% 0%)" }}
                         transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
-                        className="fixed inset-0 bg-[#050505] z-[90] flex flex-col pt-32 px-6 pb-6 md:hidden pointer-events-auto"
+                        className="fixed inset-0 bg-[#050505] z-[90] flex flex-col pt-32 px-6 pb-6 md:hidden pointer-events-auto overflow-y-auto"
                     >
-                        <div className="flex flex-col w-full max-w-lg mx-auto h-full justify-between">
+                        <div className="flex flex-col w-full max-w-lg mx-auto min-h-full justify-between gap-6">
                             <div className="flex flex-col gap-1">
                                 {navItems.map((item, i) => {
                                     const isActive = isItemActive(item);
+                                    if (item.id === "services") {
+                                        return (
+                                            <motion.div
+                                                key={item.name}
+                                                initial={{ opacity: 0, x: -30 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
+                                                className="border-b border-white/5"
+                                            >
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setMobileServicesOpen((o) => !o)}
+                                                    aria-expanded={mobileServicesOpen}
+                                                    className="group flex items-center justify-between py-4 w-full active:opacity-70"
+                                                >
+                                                    <span className={cn(
+                                                        "text-2xl font-bold transition-colors",
+                                                        isActive || mobileServicesOpen ? "text-[#00d3f3]" : "text-white/90 group-hover:text-[#00d3f3]"
+                                                    )}>
+                                                        {item.name}
+                                                    </span>
+                                                    <ChevronDown className={cn(
+                                                        "w-5 h-5 transition-all duration-300",
+                                                        mobileServicesOpen ? "rotate-180 text-[#00d3f3]" : "text-white/30"
+                                                    )} />
+                                                </button>
+                                                <AnimatePresence initial={false}>
+                                                    {mobileServicesOpen && (
+                                                        <motion.div
+                                                            initial={{ height: 0, opacity: 0 }}
+                                                            animate={{ height: "auto", opacity: 1 }}
+                                                            exit={{ height: 0, opacity: 0 }}
+                                                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                                            className="overflow-hidden"
+                                                        >
+                                                            <MobileServicesList
+                                                                pathname={pathname}
+                                                                onNavigate={() => {
+                                                                    setMobileMenuOpen(false);
+                                                                    setMobileServicesOpen(false);
+                                                                }}
+                                                            />
+                                                        </motion.div>
+                                                    )}
+                                                </AnimatePresence>
+                                            </motion.div>
+                                        );
+                                    }
                                     return (
                                         <motion.div
                                             key={item.name}

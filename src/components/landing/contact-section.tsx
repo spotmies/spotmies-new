@@ -6,9 +6,8 @@ import { Mail, Phone, Linkedin, Instagram, Youtube, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LocationMap } from "@/components/ui/expand-map";
 import { AmbientBackground } from "@/components/ui/ambient-background";
+import { submitLead } from "@/lib/leads";
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxmCKtzq0paW6ovftholsG1MqTpYVngu6JE6n12HWYnysF78xpS/exec";
-const N8N_WEBHOOK_URL = "https://n8n.srv1343937.hstgr.cloud/webhook/website-form-spotmies";
 
 // Custom Icon: Material Symbols Rounded "location_on" (Outlined)
 const LocationOnIcon = ({ className }: { className?: string }) => (
@@ -57,33 +56,13 @@ export const ContactSection = () => {
         setIsSubmitting(true);
 
         try {
-            const formData = new FormData();
-            formData.append("Name", formState.name);
-            formData.append("Email", formState.email);
-            formData.append("Phone", `${formState.phoneCode} ${formState.phoneNumber}`);
-            formData.append("Message", formState.message);
-            formData.append("Date", new Date().toISOString().substring(0, 10));
-
-            const n8nPayload = {
+            await submitLead({
                 name: formState.name,
                 email: formState.email,
                 phone: `${formState.phoneCode} ${formState.phoneNumber}`,
                 message: formState.message,
                 source: "spotmies-website"
-            };
-
-            await Promise.all([
-                fetch(GOOGLE_SCRIPT_URL, {
-                    method: "POST",
-                    body: formData,
-                }).catch(err => console.error("Google Script Error:", err)),
-
-                fetch(N8N_WEBHOOK_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(n8nPayload)
-                }).catch(err => console.error("n8n Webhook Error:", err))
-            ]);
+            });
 
             alert("Thank you! We have received your message and will contact you shortly.");
             setFormState({

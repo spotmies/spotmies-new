@@ -2,7 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useScroll, useTransform, useSpring, useInView, AnimatePresence } from "framer-motion";
-import { Volume2, VolumeX } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Volume2, VolumeX } from "lucide-react";
 import { PerspectiveMarqueePlayer } from "@/components/ui/perspective-marquee";
 
 const NOTCH_H = 80; // 5rem
@@ -273,8 +274,10 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                         />
 
                         {/* Title & Description Overlay */}
+                        {/* Fixed width, measured from the viewport (the panel's final size), not from the panel: the panel widens
+                            as you scroll, and text sized from it kept re-wrapping mid-animation */}
                         <motion.div
-                            className="absolute bottom-10 left-6 md:bottom-16 md:left-16 max-w-[375px] md:max-w-4xl z-10 pointer-events-none"
+                            className="absolute bottom-10 left-6 md:bottom-16 md:left-16 w-[calc(100vw-3rem)] md:w-[min(56rem,calc(100vw-8rem))] z-10 pointer-events-none"
                             style={{ opacity: textOverlayOpacity, y: textOverlayY }}
                         >
                             <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-[1.3] md:leading-[1.2]">
@@ -285,6 +288,17 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
                             <p className="text-base md:text-xl text-white font-light leading-relaxed mix-blend-difference max-w-3xl">
                                 Transform your creative vision into reality with our state-of-the-art AI video services. <br /> We blend advanced machine learning with cinematic storytelling to produce stunning, high-fidelity visual narratives—scaling your production capabilities instantly.
                             </p>
+                            {/* Clickable inside the click-to-mute video: keeps its own click, and hides the Mute cursor while hovered */}
+                            <Link
+                                href="/expertise/generative-ai-filmmaking"
+                                onClick={(e) => e.stopPropagation()}
+                                onMouseEnter={() => setIsHovering(false)}
+                                onMouseLeave={() => setIsHovering(true)}
+                                className="group/more pointer-events-auto cursor-pointer mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-black shadow-[0_0_40px_-10px_rgba(255,255,255,0.5)] transition-colors duration-300 hover:bg-[#00eef9]"
+                            >
+                                Know more
+                                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/more:translate-x-0.5" />
+                            </Link>
                         </motion.div>
                     </motion.div>
 
