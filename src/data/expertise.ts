@@ -230,7 +230,7 @@ const aiMachineLearning: ExpertisePage = {
     ctaLabel: "Build with us",
     hero: {
         eyebrow: "AI & ML Development",
-        title: { lead: "Production-ready AI products,", muted: "engineered by a team that operates its own AI platforms." },
+        title: { lead: "Production-ready AI products,", muted: "from a team that runs its own." },
         subtitle: "From first prototype to a live product, we build the AI, the product around it and the launch.",
         tagline: "We build products. Ours and yours.",
         exploreLabel: "Explore our AI work",
@@ -493,7 +493,7 @@ const generativeAiFilm: ExpertisePage = {
     ctaLabel: "Create with us",
     hero: {
         eyebrow: "Generative AI Filming",
-        title: { lead: "Films, ads and product videos made with generative AI,", muted: "by a team that builds AI products." },
+        title: { lead: "Films, ads and product videos,", muted: "made with generative AI." },
         subtitle: "From script to final cut, creatively directed by people and produced with AI.",
         tagline: "We build products. Ours and yours.",
         // "Watch our work" once there are reels to show; until then the button reads "See how we work"
@@ -587,7 +587,7 @@ const saasPlatforms: ExpertisePage = {
     ctaLabel: "Build your SaaS",
     hero: {
         eyebrow: "SaaS Development",
-        title: { lead: "SaaS products built for growth,", muted: "backed by our own platforms in operation." },
+        title: { lead: "SaaS products built for growth,", muted: "by a team that runs its own." },
         subtitle: "Architecture, billing, onboarding and analytics, from MVP to paying customers.",
         tagline: "We build products. Ours and yours.",
         exploreLabel: "Explore our products",

@@ -2,7 +2,6 @@
 
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 import { ArrowDown } from "lucide-react";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { RocketIcon, type RocketIconHandle } from "@/components/ui/rocket-icon";
@@ -15,10 +14,6 @@ export function ExpertiseHero({ page }: { page: ExpertisePage }) {
     // Launches when the whole button is hovered, not only the icon
     const rocketRef = useRef<RocketIconHandle>(null);
     // Second button jumps to the work on show; a page with no work to show yet points at how we work instead
-    // Longer headlines get a smaller size, so a two-part title stays within about four lines
-    const titleLength = hero.title.lead.length + (hero.title.muted?.length ?? 0);
-    const titleSize =
-        titleLength > 80 ? "text-[clamp(34px,4vw,58px)]" : titleLength > 50 ? "text-[clamp(38px,4.6vw,70px)]" : "text-[clamp(42px,5.6vw,84px)]";
     const showcase = page.ownProducts.items.length ? "built" : page.clientWork.items.length ? "work" : null;
 
     return (
@@ -44,15 +39,15 @@ export function ExpertiseHero({ page }: { page: ExpertisePage }) {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.1 }}
-                        className={cn("font-normal leading-[0.98] tracking-[-0.04em]", titleSize)}
+                        className="font-normal leading-[0.98] tracking-[-0.04em] text-[clamp(34px,4.4vw,64px)]"
                     >
-                        {/* On phones the two parts flow as one sentence, so a lead too wide for one line
-                            doesn't leave its last word stranded on a line of its own */}
-                        <span className="sm:block text-white">{hero.title.lead}</span>
+                        {/* One size on every page; each headline is written to fit three lines at it. The two parts
+                            flow as one sentence, so the lead never leaves a short line of its own */}
+                        <span className="text-white">{hero.title.lead}</span>
                         {hero.title.muted && (
                             <>
                                 {" "}
-                                <span className="sm:block pb-[0.1em] bg-clip-text text-transparent bg-[linear-gradient(180deg,#6f6f6f_0%,#3d3d3d_100%)] [box-decoration-break:clone] [-webkit-box-decoration-break:clone]">
+                                <span className="pb-[0.1em] bg-clip-text text-transparent bg-[linear-gradient(180deg,#6f6f6f_0%,#3d3d3d_100%)] [box-decoration-break:clone] [-webkit-box-decoration-break:clone]">
                                     {hero.title.muted}
                                 </span>
                             </>
