@@ -36,7 +36,7 @@ const XIcon = ({ className }: { className?: string }) => (
 
 
 export const ContactSection = () => {
-    const callUsNumber = process.env.NEXT_PUBLIC_CALL_US_NUMBER || "+91 7416498484";
+    const callUsNumber = process.env.NEXT_PUBLIC_CALL_US_NUMBER || "+91 94405 65539";
     const callUsLink = `tel:${callUsNumber.replace(/\s+/g, '')}`;
 
     const hiringNumber = process.env.NEXT_PUBLIC_HIRING_NUMBER || "+91 7207333883";

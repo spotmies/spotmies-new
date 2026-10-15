@@ -7,7 +7,7 @@ import { SprintForm } from "@/components/expertise/sprint-form";
 import { Container, Headline, PillEyebrow } from "@/components/expertise/primitives";
 import type { ExpertisePage } from "@/data/expertise";
 
-const CALL_US_NUMBER = process.env.NEXT_PUBLIC_CALL_US_NUMBER || "+91 7416498484";
+const CALL_US_NUMBER = process.env.NEXT_PUBLIC_CALL_US_NUMBER || "+91 94405 65539";
 
 // Laid out like the home contact section: pitch on the left, glass form on the right
 export function StartSection({ page }: { page: ExpertisePage }) {
