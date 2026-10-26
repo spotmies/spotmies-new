@@ -13,6 +13,7 @@ import Image from "next/image";
 import CountUp from "@/components/ui/count-up";
 import { FoundersSection } from "@/components/landing/founders-section";
 import BackButton from "@/components/ui/back-button";
+import { cdn } from "@/lib/cdn";
 
 // --- ANIMATION VARIANTS ---
 const fadeInUp = {
@@ -256,13 +257,13 @@ export default function AboutPage() {
                     <div className="w-full md:w-2/3">
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                             {[
-                                { src: "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_SeventhFolder_ourteam1.jpeg", span: "col-span-1 row-span-1" },
-                                { src: "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_SeventhFolder_ourteam3.jpg", span: "col-span-1 row-span-2" },
-                                { src: "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_SeventhFolder_ourteam3.jpg", span: "col-span-1 row-span-1" },
-                                { src: "https://spotmiesstorage.blob.core.windows.net/old-data/group.jpg", span: "col-span-1 row-span-1" },
-                                { src: "https://reaidystorage.blob.core.windows.net/spotmiespublic/img.jpg", span: "col-span-1 row-span-1" },
-                                { src: "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_SeventhFolder_ourteam3.jpg", span: "col-span-1 row-span-1" },
-                                { src: "https://reaidystorage.blob.core.windows.net/spotmiespublic/img.jpg", span: "col-span-2 md:col-span-1 row-span-1" },
+                                { src: cdn("old-data/spotmies_site_SeventhFolder_ourteam1.webp"), span: "col-span-1 row-span-1" },
+                                { src: cdn("old-data/spotmies_site_SeventhFolder_ourteam3.webp"), span: "col-span-1 row-span-2" },
+                                { src: cdn("old-data/spotmies_site_SeventhFolder_ourteam3.webp"), span: "col-span-1 row-span-1" },
+                                { src: cdn("old-data/group.webp"), span: "col-span-1 row-span-1" },
+                                { src: cdn("spotmiespublic/img.webp"), span: "col-span-1 row-span-1" },
+                                { src: cdn("old-data/spotmies_site_SeventhFolder_ourteam3.webp"), span: "col-span-1 row-span-1" },
+                                { src: cdn("spotmiespublic/img.webp"), span: "col-span-2 md:col-span-1 row-span-1" },
                             ].map((img, idx) => (
                                 <motion.div
                                     key={idx}

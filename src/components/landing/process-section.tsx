@@ -12,6 +12,7 @@ import {
 import { AmbientBackground } from "@/components/ui/ambient-background";
 import { IndustriesGrid } from "@/components/landing/industries-grid";
 import { NoiseOverlay } from "@/components/ui/noise-overlay";
+import { cdn } from "@/lib/cdn";
 
 const fadeUpVariant = {
     hidden: { opacity: 0, y: 30 },
@@ -110,7 +111,7 @@ export function ProcessSection() {
             {/* 2. PARALLAX BANNER */}
             <section
                 className="w-full h-[100vh] relative border-y border-white/10 overflow-hidden flex items-center justify-center bg-fixed bg-cover bg-center z-10"
-                style={{ backgroundImage: 'url(https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_SixthFolder_OurDesginsPic.png)' }}
+                style={{ backgroundImage: `url(${cdn("old-data/spotmies_site_SixthFolder_OurDesginsPic.webp")})` }}
             >
                 <div className="absolute inset-0 bg-[#050505]/60 backdrop-blur-[0px]"></div>
 

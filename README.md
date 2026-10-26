@@ -20,6 +20,24 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Images and videos
+
+Site images and videos are served from Cloudflare R2, not from `public/`. Code refers to them with the `cdn()` helper in `src/lib/cdn.ts`:
+
+```tsx
+<img src={cdn("media/reaidy.webp")} alt="Reaidy" />
+```
+
+`cdn()` prefixes the path with `NEXT_PUBLIC_CDN_URL` (set in `.env`, and in the Vercel project settings for deployments). `next.config.ts` allows that host for `next/image`.
+
+To add or replace a file, upload it to the R2 bucket `spotmiesassets` at the same path the code uses, for example with [rclone](https://rclone.org/s3/#cloudflare-r2):
+
+```bash
+rclone copy ./hero-6.mp4 r2:spotmiesassets/videos/ --header-upload "Cache-Control: public, max-age=604800"
+```
+
+Images are stored as WebP, resized to the largest size the site shows, and videos as 1080p H.264. Browsers cache files for 7 days, so give a changed file a new name rather than overwriting it.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

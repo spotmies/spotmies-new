@@ -31,3 +31,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# CDN assets: originals in cdn-assets, optimized copies in cdn-dist (uploaded to R2, not committed; public/cdn is a local symlink to cdn-dist)
+/cdn-assets/
+/public/cdn
+/cdn-dist/

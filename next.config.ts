@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
 import path from "path";
 
+// Images formerly on Azure Blob are served from NEXT_PUBLIC_CDN_URL (see src/lib/cdn.ts).
+// When it points at a remote host (Cloudflare R2), next/image has to allow that host.
+const cdnHost = (() => {
+  try {
+    return new URL(process.env.NEXT_PUBLIC_CDN_URL ?? "").hostname;
+  } catch {
+    return null;
+  }
+})();
+
 const nextConfig: NextConfig = {
   /* config options here */
   devIndicators: false,
@@ -11,19 +21,9 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'spotmiesstorage.blob.core.windows.net',
-        port: '',
-        pathname: '/**',
-      },
-      // --- FIX: Added the new storage domain here ---
-      {
-        protocol: 'https',
-        hostname: 'reaidystorage.blob.core.windows.net',
-        port: '',
-        pathname: '/**',
-      },
+      ...(cdnHost
+        ? [{ protocol: 'https' as const, hostname: cdnHost, port: '', pathname: '/**' }]
+        : []),
       {
         protocol: 'https',
         hostname: 'placehold.co',

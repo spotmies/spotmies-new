@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import CountUp from "@/components/ui/count-up";
 import { Container } from "@/components/expertise/primitives";
+import { cdn } from "@/lib/cdn";
 
 const STATS = [
     { value: 2019, label: "Established", plain: true },
@@ -44,7 +45,7 @@ export function StatsStrip() {
                     >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_last%20image_startupindia.png"
+                            src={cdn("old-data/spotmies_site_last%20image_startupindia.webp")}
                             alt="Startup India"
                             className="h-9 md:h-12 w-auto grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
                         />

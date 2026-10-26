@@ -5,6 +5,7 @@ import { motion, useMotionValue, useScroll, useTransform, useSpring, useInView, 
 import Link from "next/link";
 import { ArrowRight, Volume2, VolumeX } from "lucide-react";
 import { PerspectiveMarqueePlayer } from "@/components/ui/perspective-marquee";
+import { cdn } from "@/lib/cdn";
 
 const NOTCH_H = 80; // 5rem
 const CURVE_R = 24; // corner / flare radius
@@ -104,11 +105,11 @@ export const HeroVideoReveal = ({ children }: { children: React.ReactNode }) => 
     const isContainerInView = useInView(containerRef);
 
     const videos = [
-        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3iVkvCKwGbtro0xYShRpEzMyFOLuf7c8eCGVqT",
-        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3iKoFnG85WTx7bFMEnAO58qUL6iuIVRmQzkN9Y",
-        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3iBttBB0ExxH8PRt7TM2LOspFIy0U5EJv3AeYk",
-        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3it9fvGSlUx52NqWcVG736rAjlbaDeOMXsL8dw",
-        "https://o3xxyf2839.ufs.sh/f/z2WZxvQexo3ieTqBXafMf3Tj5ICFamSKdR2HWEQsw4uLhBOz"
+        cdn("videos/hero-1.mp4"),
+        cdn("videos/hero-2.mp4"),
+        cdn("videos/hero-3.mp4"),
+        cdn("videos/hero-4.mp4"),
+        cdn("videos/hero-5.mp4")
     ];
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [isMuted, setIsMuted] = useState(true);

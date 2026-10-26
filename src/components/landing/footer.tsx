@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { cdn } from "@/lib/cdn";
 
 export default function Footer() {
 
@@ -96,7 +97,7 @@ export default function Footer() {
                         <h2 className="text-white text-base font-bold mb-5 uppercase tracking-wider">Recognized By</h2>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_last image_startupindia.png"
+                            src={cdn("old-data/spotmies_site_last%20image_startupindia.webp")}
                             alt="Recognized by Startup India"
                             className="w-[160px] grayscale hover:grayscale-0 transition-all duration-500 ease-in-out cursor-pointer opacity-70 hover:opacity-100"
                         />
