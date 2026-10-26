@@ -1,4 +1,5 @@
 import { Project } from "@/types/types";
+import { cdn } from "@/lib/cdn";
 
 export const PROJECT_DATA: Project[] = [
     {
@@ -33,7 +34,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Reaidy.io",
         category: "Web App, AI/Recruitment",
         description: "Revolutionizing recruitment with precise AI job interviews and smart assessments.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/reaidy.png",
+        image: cdn("media/reaidy.webp"),
         link: "https://reaidy.io/",
         client: "Reaidy.io",
         timeline: "Ongoing",
@@ -46,11 +47,11 @@ export const PROJECT_DATA: Project[] = [
         result: "Companies achieve reduced time-to-hire, unbiased evaluations, and an improved candidate experience, enabling them to scale teams efficiently without compromising on quality.",
         testimonial: undefined,
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/reaidy.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/reaidy1.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/reaidy2.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/reaidy3.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/reaidy4.png"
+            cdn("media/reaidy.webp"),
+            cdn("media/reaidy1.webp"),
+            cdn("media/reaidy2.webp"),
+            cdn("media/reaidy3.webp"),
+            cdn("media/reaidy4.webp")
         ]
     },
     {
@@ -58,7 +59,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Amero X",
         category: "Web App, DEX",
         description: "A premium hybrid DEX featuring non-custodial swaps, copy trading, and institutional-grade tools.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/amerox.png",
+        image: cdn("media/amerox.webp"),
         link: "https://amerox.io/",
         client: "Amero X",
         timeline: "Ongoing",
@@ -75,13 +76,13 @@ export const PROJECT_DATA: Project[] = [
             position: "Verified User"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/amerox.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/amerox1.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/amerox2.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/amerox3.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/amerox4.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/amerox5.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/amerox6.png"
+            cdn("media/amerox.webp"),
+            cdn("media/amerox1.webp"),
+            cdn("media/amerox2.webp"),
+            cdn("media/amerox3.webp"),
+            cdn("media/amerox4.webp"),
+            cdn("media/amerox5.webp"),
+            cdn("media/amerox6.webp")
         ]
     },
     {
@@ -89,7 +90,7 @@ export const PROJECT_DATA: Project[] = [
         title: "OROLEXA",
         category: "IoT/Mobile App, Healthcare",
         description: "Smart dental health tracking with AI-powered instant analysis.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/orelexa.png",
+        image: cdn("media/orelexa.webp"),
         link: "",
         client: "OROLEXA",
         timeline: "Ongoing",
@@ -106,12 +107,12 @@ export const PROJECT_DATA: Project[] = [
             position: "Founder at OROLEXA"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/orelexa.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/orelexa1.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/orelexa2.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/orelexa3.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/orelexa4.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/orelexa5.png"
+            cdn("media/orelexa.webp"),
+            cdn("media/orelexa1.webp"),
+            cdn("media/orelexa2.webp"),
+            cdn("media/orelexa3.webp"),
+            cdn("media/orelexa4.webp"),
+            cdn("media/orelexa5.webp")
         ]
     },
     {
@@ -119,7 +120,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Vitals Care Pro",
         category: "IoT/Mobile App, Healthcare",
         description: "Continuous remote health monitoring for chronic conditions and elderly care.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/vitals.png",
+        image: cdn("media/vitals.webp"),
         link: "",
         client: "Vitals Care Pro",
         timeline: "Ongoing",
@@ -132,8 +133,8 @@ export const PROJECT_DATA: Project[] = [
         result: "Improved patient safety through early detection, reduced hospitalizations, and provided peace of mind for both users and families by ensuring continuous, reliable, and connected healthcare monitoring.",
         testimonial: undefined,
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/vitals.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/vitals1.png"
+            cdn("media/vitals.webp"),
+            cdn("media/vitals1.webp")
         ]
     },
     {
@@ -141,7 +142,7 @@ export const PROJECT_DATA: Project[] = [
         title: "EduMoon",
         category: "Mobile App, EdTech",
         description: "The largest engineering student community for learning, skill development, and growth.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/edumoon.png",
+        image: cdn("media/edumoon.webp"),
         link: "",
         client: "EduMoon",
         timeline: "Ongoing",
@@ -154,9 +155,9 @@ export const PROJECT_DATA: Project[] = [
         result: "Successfully bridged the academia-industry gap, empowering thousands of students to upskill, network, and advance their careers through a single integrated platform.",
         testimonial: undefined,
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/edumoon.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/edumoon1.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/edumoon2.png"
+            cdn("media/edumoon.webp"),
+            cdn("media/edumoon1.webp"),
+            cdn("media/edumoon2.webp")
         ]
     },
     {
@@ -164,7 +165,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Awaken",
         category: "Web App, Fintech",
         description: "Smart goal-based financial planning with professional expert guidance.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/awaken.png",
+        image: cdn("media/awaken.webp"),
         link: "https://awaken.mainstream.co.in/",
         client: "Awaken",
         timeline: "Ongoing",
@@ -177,8 +178,8 @@ export const PROJECT_DATA: Project[] = [
         result: "Empowered users with clarity and confidence, enabling them to transition from vague aspirations to concrete, data-backed financial roadmaps.",
         testimonial: undefined,
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/awaken.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/awaken1.png"
+            cdn("media/awaken.webp"),
+            cdn("media/awaken1.webp")
         ]
     },
     {
@@ -186,7 +187,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Chalo Ride",
         category: "Web App, ReactJS",
         description: "Visakhapatnam's most trusted and transparent two-wheeler rental service.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_102.png",
+        image: cdn("media/image_102.webp"),
         link: "https://chaloride.com/bikes-for-rental-vizag",
         client: "Chalo Ride",
         timeline: "Ongoing",
@@ -203,12 +204,12 @@ export const PROJECT_DATA: Project[] = [
             position: "Co-founders, Chalo Ride"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_102.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_7.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_6.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_8.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_9.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_5.png"
+            cdn("media/image_102.webp"),
+            cdn("media/image_7.webp"),
+            cdn("media/image_6.webp"),
+            cdn("media/image_8.webp"),
+            cdn("media/image_9.webp"),
+            cdn("media/image_5.webp")
         ]
     },
     {
@@ -216,7 +217,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Mr Bikes",
         category: "Web App, ReactJS",
         description: "Andhra Pradesh's top bike rental platform offering flexible rides with safety gear included.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_126.png",
+        image: cdn("media/image_126.webp"),
         link: "https://www.mrbikes.in/bikes-for-rental-visakapatnam",
         client: "Mr Bikes",
         timeline: "Ongoing",
@@ -233,11 +234,11 @@ export const PROJECT_DATA: Project[] = [
             position: "Owner, Mr Bikes"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_126.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_2.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_1.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_4.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_3.png"
+            cdn("media/image_126.webp"),
+            cdn("media/image_2.webp"),
+            cdn("media/image_1.webp"),
+            cdn("media/image_4.webp"),
+            cdn("media/image_3.webp")
         ]
     },
     {
@@ -245,7 +246,7 @@ export const PROJECT_DATA: Project[] = [
         title: "SafeGuard Air",
         category: "IoT/Mobile App, Environment",
         description: "Smart IoT + AI platform for real-time air quality monitoring and safety alerts.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/safeguardair.png",
+        image: cdn("media/safeguardair.webp"),
         link: "https://www.safeguardair.com/",
         client: "SafeGuard Air",
         timeline: "Ongoing",
@@ -258,10 +259,10 @@ export const PROJECT_DATA: Project[] = [
         result: "SafeGuard Air delivers real-time awareness, enabling individuals and businesses to take preventive action, reduce exposure to harmful pollutants, and ensure healthier, safer environments.",
         testimonial: undefined,
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/safeguardair.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/safeguardair1.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/safeguardair2.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/safeguardair3.png"
+            cdn("media/safeguardair.webp"),
+            cdn("media/safeguardair1.webp"),
+            cdn("media/safeguardair2.webp"),
+            cdn("media/safeguardair3.webp")
         ]
     },
     {
@@ -269,7 +270,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Commuter",
         category: "Mobile App, Travel",
         description: "A carpooling platform connecting people to share rides safely and efficiently.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/commuter.png",
+        image: cdn("media/commuter.webp"),
         link: "",
         client: "Commuter",
         timeline: "Ongoing",
@@ -282,9 +283,9 @@ export const PROJECT_DATA: Project[] = [
         result: "Significantly reduced travel expenses and environmental impact for users while fostering a trusted community of reliable daily commuters.",
         testimonial: undefined,
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/commuter.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/commuter1.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/commuter2.png"
+            cdn("media/commuter.webp"),
+            cdn("media/commuter1.webp"),
+            cdn("media/commuter2.webp")
         ]
     },
     {
@@ -292,7 +293,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Mobile Masala",
         category: "Web App, Entertainment",
         description: "A dedicated celebrity news portal with streamlined editorial workflows.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/mobilemasala.png",
+        image: cdn("media/mobilemasala.webp"),
         link: "https://www.mobilemasala.com/",
         client: "Mobile Masala",
         timeline: "Ongoing",
@@ -305,8 +306,8 @@ export const PROJECT_DATA: Project[] = [
         result: "Reduced editorial turnaround time by nearly 35%, allowing the team to break news faster and retain a larger, more engaged audience.",
         testimonial: undefined,
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/mobilemasala.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/mobilemasala1.png"
+            cdn("media/mobilemasala.webp"),
+            cdn("media/mobilemasala1.webp")
         ]
     },
     {
@@ -314,7 +315,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Vihaan Electrix",
         category: "Mobile App, AdobeXD",
         description: "A complete EV ecosystem for booking rides, finding chargers, and powering green travel.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_110.png",
+        image: cdn("media/image_110.webp"),
         link: "https://www.vihaanelectrix.revoluce.in/",
         client: "Vihaan Electrix",
         timeline: "Ongoing",
@@ -331,11 +332,11 @@ export const PROJECT_DATA: Project[] = [
             position: "Operations Lead, Vihaan Electrix"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_110.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_36.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_37.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_38.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_35.png"
+            cdn("media/image_110.webp"),
+            cdn("media/image_36.webp"),
+            cdn("media/image_37.webp"),
+            cdn("media/image_38.webp"),
+            cdn("media/image_35.webp")
         ]
     },
     {
@@ -343,7 +344,7 @@ export const PROJECT_DATA: Project[] = [
         title: "MyBodyQode",
         category: "Web App, HealthTech",
         description: "Unlock your genetic potential with AI-powered preventive health insights tailored to your DNA.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/mybodyqode.png",
+        image: cdn("media/mybodyqode.webp"),
         link: "https://mybodyqode.vercel.app/",
         client: "MyBodyQode",
         timeline: "Ongoing",
@@ -356,8 +357,8 @@ export const PROJECT_DATA: Project[] = [
         result: "Empowered users with actionable, science-backed health insights, allowing them to make informed lifestyle choices that align perfectly with their genetic predisposition.",
         testimonial: undefined,
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/mybodyqode.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/mybodyqode1.png"
+            cdn("media/mybodyqode.webp"),
+            cdn("media/mybodyqode1.webp")
         ]
     },
     {
@@ -365,7 +366,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Farm Vaidya",
         category: "Web App, AgriTech",
         description: "Empowering agriculture with Gen AI-powered multilingual voice solutions.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/farmvidya.png",
+        image: cdn("media/farmvidya.webp"),
         link: "https://www.farmvaidya.ai/",
         client: "Farm Vaidya",
         timeline: "Ongoing",
@@ -378,13 +379,13 @@ export const PROJECT_DATA: Project[] = [
         result: "Democratized access to expert knowledge, enabling farmers to make data-driven decisions that improve crop yields and sustainability.",
         testimonial: undefined,
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/farmvidya.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/farmvidya1.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/farmvidya2.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/farmvidya3.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/farmvidya4.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/farmvidya5.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/farmvidya6.png"
+            cdn("media/farmvidya.webp"),
+            cdn("media/farmvidya1.webp"),
+            cdn("media/farmvidya2.webp"),
+            cdn("media/farmvidya3.webp"),
+            cdn("media/farmvidya4.webp"),
+            cdn("media/farmvidya5.webp"),
+            cdn("media/farmvidya6.webp")
         ]
     },
     {
@@ -392,7 +393,7 @@ export const PROJECT_DATA: Project[] = [
         title: "WingDent",
         category: "Web App, Healthcare",
         description: "Tele-dentistry platform providing professional dental care at your doorstep.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/wingdent.png",
+        image: cdn("media/wingdent.webp"),
         link: "https://wingdent.com/",
         client: "WingDent",
         timeline: "Ongoing",
@@ -405,15 +406,15 @@ export const PROJECT_DATA: Project[] = [
         result: "Made professional dental care significantly more affordable and accessible, bringing the clinic experience into the comfort of the patient's home.",
         testimonial: undefined,
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/wingdent.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/wingdent1.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/wingdent2.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/wingdent3.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/wingdent4.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/wingdent5.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/wingdent6.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/wingdent7.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/wingdent8.png"
+            cdn("media/wingdent.webp"),
+            cdn("media/wingdent1.webp"),
+            cdn("media/wingdent2.webp"),
+            cdn("media/wingdent3.webp"),
+            cdn("media/wingdent4.webp"),
+            cdn("media/wingdent5.webp"),
+            cdn("media/wingdent6.webp"),
+            cdn("media/wingdent7.webp"),
+            cdn("media/wingdent8.webp")
         ]
     },
     {
@@ -421,7 +422,7 @@ export const PROJECT_DATA: Project[] = [
         title: "A Square Go Karting",
         category: "Mobile App, Flutter",
         description: "The ultimate companion app for booking and safety at India's longest go-kart track.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_125.png",
+        image: cdn("media/image_125.webp"),
         link: "https://app.asquaregokarting.com/",
         client: "A Square Go Karting",
         timeline: "Ongoing",
@@ -438,11 +439,11 @@ export const PROJECT_DATA: Project[] = [
             position: "Client Representative"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_125.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_73.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_74.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_75.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_76.png"
+            cdn("media/image_125.webp"),
+            cdn("media/image_73.webp"),
+            cdn("media/image_74.webp"),
+            cdn("media/image_75.webp"),
+            cdn("media/image_76.webp")
         ]
     },
     {
@@ -450,7 +451,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Cypher-B",
         category: "Web App, NextJS",
         description: "Securing academic verification on the blockchain with hassle-free, gasless transactions.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_115.png",
+        image: cdn("media/image_115.webp"),
         link: "https://cypherb.spotmies.com/",
         client: "Cypher-B",
         timeline: "Ongoing",
@@ -467,14 +468,14 @@ export const PROJECT_DATA: Project[] = [
             position: "CTO, Cypher-B"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_115.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_62.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_63.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_64.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_65.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_66.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_67.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_68.png"
+            cdn("media/image_115.webp"),
+            cdn("media/image_62.webp"),
+            cdn("media/image_63.webp"),
+            cdn("media/image_64.webp"),
+            cdn("media/image_65.webp"),
+            cdn("media/image_66.webp"),
+            cdn("media/image_67.webp"),
+            cdn("media/image_68.webp")
         ]
     },
     {
@@ -482,7 +483,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Boom Boom Talk",
         category: "Mobile App, Figma",
         description: "A Web3 dating platform where genuine conversations matter more than superficial swipes.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_116.png",
+        image: cdn("media/image_116.webp"),
         link: "",
         client: "Boom Boom Talk",
         timeline: "Ongoing",
@@ -499,11 +500,11 @@ export const PROJECT_DATA: Project[] = [
             position: "Founder, Boom Boom Talk"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_116.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_72.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_69.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_70.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_71.png"
+            cdn("media/image_116.webp"),
+            cdn("media/image_72.webp"),
+            cdn("media/image_69.webp"),
+            cdn("media/image_70.webp"),
+            cdn("media/image_71.webp")
         ]
     },
     {
@@ -511,7 +512,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Decentrialz",
         category: "Web App, ReactJS",
         description: "Accelerating clinical trial recruitment through smart automation and empathetic AI.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_120.png",
+        image: cdn("media/image_120.webp"),
         link: "https://decentrialz.com/",
         client: "Decentrialz",
         timeline: "Ongoing",
@@ -528,11 +529,11 @@ export const PROJECT_DATA: Project[] = [
             position: "Founder at Advait Labs & Decentrialz"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_120.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_87.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_88.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_89.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_90.png"
+            cdn("media/image_120.webp"),
+            cdn("media/image_87.webp"),
+            cdn("media/image_88.webp"),
+            cdn("media/image_89.webp"),
+            cdn("media/image_90.webp")
         ]
     },
     {
@@ -540,7 +541,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Nandikrushi",
         category: "Mobile App, Figma",
         description: "Bridging the gap between farmers and families with 100% traceable organic food.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_113.png",
+        image: cdn("media/image_113.webp"),
         link: "",
         client: "Nandikrushi",
         timeline: "Ongoing",
@@ -557,11 +558,11 @@ export const PROJECT_DATA: Project[] = [
             position: "Director, Nandikrushi"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_113.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_54.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_55.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_56.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_57.png"
+            cdn("media/image_113.webp"),
+            cdn("media/image_54.webp"),
+            cdn("media/image_55.webp"),
+            cdn("media/image_56.webp"),
+            cdn("media/image_57.webp")
         ]
     },
     {
@@ -569,7 +570,7 @@ export const PROJECT_DATA: Project[] = [
         title: "CGRUM",
         category: "Mobile App, Figma",
         description: "Gamifying TV ads with instant QR rewards to turn viewers into engaged winners.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_117.png",
+        image: cdn("media/image_117.webp"),
         link: "https://play.google.com/store/apps/details?id=com.bheemaraju.cgrum",
         client: "CGRUM",
         timeline: "Ongoing",
@@ -586,11 +587,11 @@ export const PROJECT_DATA: Project[] = [
             position: "Marketing Head, CGRUM"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_117.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_40.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_42.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_43.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_41.png"
+            cdn("media/image_117.webp"),
+            cdn("media/image_40.webp"),
+            cdn("media/image_42.webp"),
+            cdn("media/image_43.webp"),
+            cdn("media/image_41.webp")
         ]
     },
     {
@@ -598,7 +599,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Workewhere",
         category: "Web App, ReactJS",
         description: "Empowering businesses with AI chatbots trained on their own website data.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_124.png",
+        image: cdn("media/image_124.webp"),
         link: "",
         client: "Workewhere",
         timeline: "Ongoing",
@@ -615,12 +616,12 @@ export const PROJECT_DATA: Project[] = [
             position: "CTO, Workewhere"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_124.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_127.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_128.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_129.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_130.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_131.png"
+            cdn("media/image_124.webp"),
+            cdn("media/image_127.webp"),
+            cdn("media/image_128.webp"),
+            cdn("media/image_129.webp"),
+            cdn("media/image_130.webp"),
+            cdn("media/image_131.webp")
         ]
     },
     {
@@ -628,7 +629,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Referral Bazaar",
         category: "Mobile App, Retail",
         description: "Automating local shop referrals, discounts, and wallet settlements.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/referalbazzar.png",
+        image: cdn("media/referalbazzar.webp"),
         link: "",
         client: "Referral Bazaar",
         timeline: "Ongoing",
@@ -645,8 +646,8 @@ export const PROJECT_DATA: Project[] = [
             position: "Founder at Referral Bazaar"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/referalbazzar.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/referalbazzar1.png"
+            cdn("media/referalbazzar.webp"),
+            cdn("media/referalbazzar1.webp")
         ]
     },
     {
@@ -654,7 +655,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Credit Report",
         category: "Web App, ReactJS",
         description: "Your all-in-one financial dashboard for credit insights and seamless loan approvals.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_122.png",
+        image: cdn("media/image_122.webp"),
         link: "https://saiteja-credit-report.onrender.com/",
         client: "Credit Report",
         timeline: "Ongoing",
@@ -671,8 +672,8 @@ export const PROJECT_DATA: Project[] = [
             position: "Product Manager, Credit Report"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_122.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_96.png"
+            cdn("media/image_122.webp"),
+            cdn("media/image_96.webp")
         ]
     },
     {
@@ -680,7 +681,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Zit (Zin in Thuiswerken)",
         category: "Web App, ReactJS",
         description: "Optimizing hybrid work to boost employee well-being and maximize employer benefits.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_121.png",
+        image: cdn("media/image_121.webp"),
         link: "",
         client: "Zit (Zin in Thuiswerken)",
         timeline: "Ongoing",
@@ -697,12 +698,12 @@ export const PROJECT_DATA: Project[] = [
             position: "Founder at Zin In Thuiswerken"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_121.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_91.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_92.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_93.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_94.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_95.png"
+            cdn("media/image_121.webp"),
+            cdn("media/image_91.webp"),
+            cdn("media/image_92.webp"),
+            cdn("media/image_93.webp"),
+            cdn("media/image_94.webp"),
+            cdn("media/image_95.webp")
         ]
     },
     {
@@ -710,7 +711,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Indie Skull Syndicate",
         category: "NFT Project, NextJS",
         description: "A viral collection of 2,500 generative NFTs blending phantom vibes with human aesthetics.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_108.png",
+        image: cdn("media/image_108.webp"),
         link: "https://indieskullsyndicate.spotmies.com/",
         client: "Indie Skull Syndicate",
         timeline: "Ongoing",
@@ -727,11 +728,11 @@ export const PROJECT_DATA: Project[] = [
             position: "Creator, Indie Skull Syndicate"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_108.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_28.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_29.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_30.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_27.png"
+            cdn("media/image_108.webp"),
+            cdn("media/image_28.webp"),
+            cdn("media/image_29.webp"),
+            cdn("media/image_30.webp"),
+            cdn("media/image_27.webp")
         ]
     },
     {
@@ -739,7 +740,7 @@ export const PROJECT_DATA: Project[] = [
         title: "Mad Angles",
         category: "NFT Project, NextJS",
         description: "Expressive geometric art meets blockchain technology in a unique, triangular NFT collection.",
-        image: "https://spotmiesstorage.blob.core.windows.net/media/image_107.png",
+        image: cdn("media/image_107.webp"),
         link: "https://www.behance.net/gallery/166759955/Mad-angles-NFT-project-web-ui?tracking_source=search_projects|mad+angles+design&l=2",
         client: "Mad Angles",
         timeline: "Ongoing",
@@ -756,11 +757,11 @@ export const PROJECT_DATA: Project[] = [
             position: "Project Lead, Mad Angles"
         },
         gallery: [
-            "https://spotmiesstorage.blob.core.windows.net/media/image_107.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_25.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_24.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_23.png",
-            "https://spotmiesstorage.blob.core.windows.net/media/image_26.png"
+            cdn("media/image_107.webp"),
+            cdn("media/image_25.webp"),
+            cdn("media/image_24.webp"),
+            cdn("media/image_23.webp"),
+            cdn("media/image_26.webp")
         ]
     }
 ];

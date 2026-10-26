@@ -1,3 +1,5 @@
+import { cdn } from "@/lib/cdn";
+
 // Client quotes shown in the testimonial carousel on the home and expertise pages.
 export const TESTIMONIALS = [
     {
@@ -9,7 +11,7 @@ export const TESTIMONIALS = [
         company: "Zin In Thuiswerken",
         time: "1 year ago",
         image:
-            "https://spotmiesstorage.blob.core.windows.net/old-data/0bc8f2ee-eaf3-4760-9400-ef08d1967917.jpg",
+            cdn("old-data/0bc8f2ee-eaf3-4760-9400-ef08d1967917.webp"),
     },
     {
         id: 2,
@@ -20,7 +22,7 @@ export const TESTIMONIALS = [
         company: "Sweken",
         time: "3 years ago",
         image:
-            "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_OurClients_vamsi.jpeg",
+            cdn("old-data/spotmies_site_OurClients_vamsi.webp"),
     },
     {
         id: 3,
@@ -31,7 +33,7 @@ export const TESTIMONIALS = [
         company: "Content Creator",
         time: "3 years ago",
         image:
-            "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_OurClients_Ravi.jpeg",
+            cdn("old-data/spotmies_site_OurClients_Ravi.webp"),
     },
     {
         id: 4,
@@ -42,7 +44,7 @@ export const TESTIMONIALS = [
         company: "A-Square Entertainments",
         time: "2 years ago",
         image:
-            "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_OurClients_Anand.png",
+            cdn("old-data/spotmies_site_OurClients_Anand.webp"),
     },
     {
         id: 5,
@@ -53,7 +55,7 @@ export const TESTIMONIALS = [
         company: "Advait Labs & Decentrialz",
         time: "2 years ago",
         image:
-            "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_OurClients_Swaroop.jpeg",
+            cdn("old-data/spotmies_site_OurClients_Swaroop.webp"),
     },
     {
         id: 6,
@@ -64,7 +66,7 @@ export const TESTIMONIALS = [
         company: "Edumoon",
         time: "2 years ago",
         image:
-            "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_OurClients_Mahidhar.jpg",
+            cdn("old-data/spotmies_site_OurClients_Mahidhar.webp"),
     },
     {
         id: 7,
@@ -75,7 +77,7 @@ export const TESTIMONIALS = [
         company: "Chaloride",
         time: "2 years ago",
         image:
-            "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_OurClients_Dileep.jpeg",
+            cdn("old-data/spotmies_site_OurClients_Dileep.webp"),
     },
     {
         id: 8,
@@ -86,6 +88,6 @@ export const TESTIMONIALS = [
         company: "Mr Bikes",
         time: "2 years ago",
         image:
-            "https://spotmiesstorage.blob.core.windows.net/old-data/spotmies_site_OurClients_Venkat.jpeg",
+            cdn("old-data/spotmies_site_OurClients_Venkat.webp"),
     },
 ];
