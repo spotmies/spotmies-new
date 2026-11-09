@@ -101,7 +101,7 @@ export default function Navbar() {
 
     const scheduleMeeting = (e: React.MouseEvent) => {
         e.preventDefault();
-        window.open("https://calendly.com/spotmies/30min", "_blank");
+        window.open("https://calendly.com/anjali-spotmies/30min", "_blank");
         setMobileMenuOpen(false);
     };
 

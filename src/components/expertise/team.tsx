@@ -10,7 +10,7 @@ import { Container, FadeUp, Headline, PillEyebrow } from "@/components/expertise
 import { FOUNDERS } from "@/data/team";
 import type { ExpertisePage } from "@/data/expertise";
 
-const CALENDLY_URL = "https://calendly.com/spotmies/30min";
+const CALENDLY_URL = "https://calendly.com/anjali-spotmies/30min";
 const HIRING_NUMBER = process.env.NEXT_PUBLIC_HIRING_NUMBER || "+91 7207333883";
 
 const VALUES = [

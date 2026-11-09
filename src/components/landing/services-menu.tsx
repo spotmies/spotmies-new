@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { ICONS } from "@/components/expertise/primitives";
 import { EXPERTISE_SERVICES, getServiceHref } from "@/data/expertise";
 
-const CALENDLY_URL = "https://calendly.com/spotmies/30min";
+const CALENDLY_URL = "https://calendly.com/anjali-spotmies/30min";
 // Grace period before closing, so moving the cursor across the gap to the panel doesn't shut it
 const CLOSE_DELAY_MS = 150;
 
